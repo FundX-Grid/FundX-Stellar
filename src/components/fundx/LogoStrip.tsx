@@ -8,13 +8,13 @@ export function LogoStrip() {
         <div className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-10 md:gap-16 lg:gap-32 w-full">
          
           <div className="flex items-center justify-center h-12 cursor-default group">
-            <span className="text-3xl font-bold tracking-tight text-slate-300 transition-colors duration-300 group-hover:text-[#fbe72b]">
+            <span className="text-3xl font-bold tracking-tight_ text-slate-300 transition-colors duration-300 group-hover:text-[#fbe72b]">
               Celo
             </span>
           </div>
          
           <div className="flex items-center justify-center h-12 cursor-default group">
-            <span className="text-3xl font-bold tracking-tight text-slate-300 transition-colors duration-300 group-hover:text-[#fbe72b]">
+            <span className="text-3xl font-bold tracking-tight_ text-slate-300 transition-colors duration-300 group-hover:text-[#fbe72b]">
               MiniPay
             </span>
           </div>
