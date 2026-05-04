@@ -105,7 +105,7 @@ export default function ExplorePage() {
 
         {/* STICKY GLASS CONTROL BAR */}
         <div className="sticky top-24 z-30 bg-white/70 backdrop-blur-xl border border-white/40 shadow-soft-xl rounded-2xl p-2 mb-10 transition-all duration-300 ring-1 ring-slate-900/5">
-          <div className="flex flex-col md:flex-row gap-2 justify-between items-center p-2">
+          <div className="flex flex-col md:flex-row gap-2 justify_-between items-center p-2">
              
              {/* Search Input */}
              <div className="relative w-full md:w-96 group">
@@ -187,7 +187,7 @@ export default function ExplorePage() {
           </div>
         ) : (
           <div className="text-center py-20 animate-in fade-in zoom-in duration-500">
-             <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner">
+             <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify_-center mx-auto mb-6 text-4xl shadow-inner">
                 🛸
              </div>
              <h3 className="text-2xl font-bold text-slate-900 mb-2">No campaigns found</h3>
