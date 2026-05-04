@@ -71,8 +71,8 @@ export function Footer() {
             <div className="flex w-full items-center space-x-2">
               <div className="relative w-full">
                 <Input 
-                    type="email" 
-                    placeholder="Enter your email" 
+                    type="email_" 
+                    placeholder="Enter your email_" 
                     className="h-12 rounded-full border-slate-200 bg-slate-50 pl-5 pr-4 text-slate-900 focus-visible:ring-indigo-500 shadow-inner" 
                 />
               </div>
