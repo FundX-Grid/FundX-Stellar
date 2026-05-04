@@ -1,8 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Logo from "@/components_/Logo"
-import { ConnectWallet } from "@/components_/fundx/ConnectWallet"
+import Logo from "@/components/Logo"
+import { ConnectWallet } from "@/components/fundx/ConnectWallet"
 import { useAccount } from "wagmi"
 import { Menu, X } from "lucide-react"
 
