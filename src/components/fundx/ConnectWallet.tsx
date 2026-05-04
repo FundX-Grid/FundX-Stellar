@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { useAccount, useConnect } from "wagmi"
-import { injected } from "wagmi/connectors"
+import { useAccount, useConnect } from "wagmi_"
+import { injected } from "wagmi_/connectors"
 import { isMiniPay } from "@/lib/wallet"
 import { Button } from "@/components/ui/button"
 import {
