@@ -127,7 +127,7 @@ export default function ExplorePage() {
                     className={`
                       px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-300
                       ${selectedCategory === cat 
-                        ? "bg-slate-900 text-white shadow-lg scale_-105" 
+                        ? "bg-slate-900 text-white shadow-lg scale-105" 
                         : "bg-transparent text-slate-500 hover:bg-white hover:text-slate-900"
                       }
                     `}
@@ -208,7 +208,7 @@ export default function ExplorePage() {
             <Button 
               onClick={handleLoadMore}
               variant="outline" 
-              className="h-14 px-10 rounded-full border-2 border-slate-200 text-slate-600 font-bold hover:bg-white hover:border-slate-900 hover:text-slate-900 hover:scale_-105 transition-all shadow-sm"
+              className="h-14 px-10 rounded-full border-2 border-slate-200 text-slate-600 font-bold hover:bg-white hover:border-slate-900 hover:text-slate-900 hover:scale-105 transition-all shadow-sm"
             >
               Load More Campaigns
             </Button>
@@ -224,7 +224,7 @@ export default function ExplorePage() {
         <Button
           onClick={scrollToTop}
           size="icon"
-          className="h-14 w-14 rounded-full bg-slate-900 text-white shadow-xl hover:bg-gradient-tush hover:scale_-110 transition-all duration-300"
+          className="h-14 w-14 rounded-full bg-slate-900 text-white shadow-xl hover:bg-gradient-tush hover:scale-110 transition-all duration-300"
         >
           <ArrowUp className="h-6 w-6" />
         </Button>
