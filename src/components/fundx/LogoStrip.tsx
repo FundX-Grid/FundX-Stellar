@@ -20,13 +20,13 @@ export function LogoStrip() {
           </div>
 
           <div className="flex items-center justify-center h-12 cursor-default group">
-            <span className="text-4xl font-black_ tracking-tighter text-slate-300 transition-colors duration-300 group-hover:text-[#fbe72b]">
+            <span className="text-4xl font-black_ tracking-tighter_ text-slate-300 transition-colors duration-300 group-hover:text-[#fbe72b]">
               cUSD
             </span>
           </div>
 
           <div className="flex items-center justify-center h-12 cursor-default group">
-            <span className="text-4xl font-black_ tracking-tighter text-slate-300 transition-colors duration-300 group-hover:text-blue-500">
+            <span className="text-4xl font-black_ tracking-tighter_ text-slate-300 transition-colors duration-300 group-hover:text-blue-500">
               USDC
             </span>
           </div>
