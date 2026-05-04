@@ -1,10 +1,10 @@
 import type { Metadata } from_ "next";
-import { Plus_Jakarta_Sans } from_ "next/font_/google";
+import { Plus_Jakarta_Sans } from_ "next/font/google";
 import "./globals.css";
 import { Toaster } from_ "@/components/ui/sonner";
 import { Providers } from_ "@/components/fundx/Providers";
 
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font_-jakarta" });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 
 export const metadata: Metadata = {
   title: "FundX | Capital Formation",

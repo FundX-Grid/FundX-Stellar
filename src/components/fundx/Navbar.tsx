@@ -12,8 +12,8 @@ export function Navbar() {
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow_ = mobileOpen ? "hidden" : ""
-    return () => { document.body.style.overflow_ = "" }
+    document.body.style.overflow = mobileOpen ? "hidden" : ""
+    return () => { document.body.style.overflow = "" }
   }, [mobileOpen])
 
   const navLinks = [
