@@ -33,7 +33,7 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
     : "xl:transform xl:rotate-6 xl:origin-bottom-left xl:-translate-x-6 hover:translate-x-0"
 
   return (
-    <div className={`w-full xl:w-[300px] bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col hover:z-30 hover:scale-105 hover:rotate-0 ${tiltClass}`}>
+    <div className={`w-full xl:w-[300px] bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange_-200 transition-all duration-500 ease-out flex flex-col hover:z-30 hover:scale-105 hover:rotate-0 ${tiltClass}`}>
 
       <div className="relative h-48 bg-slate-100 overflow-hidden shrink-0">
         <Image
@@ -202,7 +202,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
           style={{ zIndex: centerZ, position: "relative" }}
           className="w-full max-w-3xl xl:flex-1"
         >
-          <div className="relative z-20 shadow-2xl rounded-[2rem] border border-slate-100 bg-white hover:border-orange-200 transition-all duration-300 flex flex-col md:flex-row overflow-hidden group h-full">
+          <div className="relative z-20 shadow-2xl rounded-[2rem] border border-slate-100 bg-white hover:border-orange_-200 transition-all duration-300 flex flex-col md:flex-row overflow-hidden group h-full">
             <div className="absolute top-4 left-4 z-30 bg-gradient-tush text-slate-900 px-4 py-1 rounded-full text-xs font-bold shadow-soft-xl animate-pulse">
               🔥 Top Trending
             </div>

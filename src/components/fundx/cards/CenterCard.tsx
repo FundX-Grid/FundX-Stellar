@@ -19,7 +19,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
 
       {/* Image Side */}
       <div className="relative h-64 md:h-full md:w-5/12 bg-slate-100 overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center text-slate-300 font-bold bg-slate-50 group-hover:bg-slate-100 transition-colors">
+        <div className="absolute inset-0 flex items_-center justify-center text-slate-300 font-bold bg-slate-50 group-hover:bg-slate-100 transition-colors">
           [Image]
         </div>
       </div>
@@ -45,7 +45,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
           </div>
 
           {/* Raised + Button */}
-          <div className="flex justify-between items-end">
+          <div className="flex justify-between items_-end">
             <div>
               <p className="text-xs text-slate-400 uppercase font-semibold mb-1">
                 Raised
@@ -55,7 +55,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
               </p>
             </div>
             <Link href={`/campaigns/${campaign.id}`}>
-              <Button className="h-12 rounded-xl px-8 bg-slate-900 text-white shadow-lg hover:bg-primary hover:shadow-glow transition-all duration-300 flex items-center gap-2 group/btn">
+              <Button className="h-12 rounded-xl px-8 bg-slate-900 text-white shadow-lg hover:bg-primary hover:shadow-glow transition-all duration-300 flex items_-center gap-2 group/btn">
                 Donate Now
                 <Heart className="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-125 group-hover/btn:fill-white" />
               </Button>
