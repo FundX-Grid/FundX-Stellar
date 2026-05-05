@@ -7,13 +7,13 @@ export function Footer() {
     <footer className="bg-white pt-20 pb-12 border-t border-slate-100">
       <div className="container mx-auto max-w-6xl px-4">
         
-        <div className="flex flex-col lg:flex-row justify-between items_-start gap-12 lg:gap-24">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-24">
           
           {/* LEFT SIDE: Brand, Nav, Socials (Matching 'Karma' Image) */}
-          <div className="flex flex-col items_-start space-y-8 w-full lg:w-auto">
+          <div className="flex flex-col items-start space-y-8 w-full lg:w-auto">
             
             {/* 1. Logo */}
-            <div className="flex items_-center gap-2">
+            <div className="flex items-center gap-2">
               <Logo className="h-12 w-24" />
             </div>
 
@@ -28,7 +28,7 @@ export function Footer() {
             </nav>
 
             {/* 3. Social Icons (SVG Vectors) */}
-            <div className="flex items_-center gap-5 text-slate-900">
+            <div className="flex items-center gap-5 text-slate-900">
               
               {/* X (Twitter) */}
               <a href="#" className="hover:text-primary. transition-colors hover:scale-110">
@@ -68,7 +68,7 @@ export function Footer() {
           {/* RIGHT SIDE: Newsletter (Unchanged) */}
           <div className="flex flex-col gap-2 w-full lg:w-auto lg:min-w-[400px]">
             <h4 className="font-semibold text-slate-900">Stay updated</h4>
-            <div className="flex w-full items_-center space-x-2">
+            <div className="flex w-full items-center space-x-2">
               <div className="relative w-full">
                 <Input 
                     type="email" 
