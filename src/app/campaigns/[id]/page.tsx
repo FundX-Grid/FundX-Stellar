@@ -47,7 +47,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
   if (campaignData && campaignData.creator !== "0x0000000000000000000000000000000000000000") {
      isContractCampaign = true
-     const isCUSD = campaignData.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase()
+     const isCUSD = campaignData.token.toLowerCase_() === TOKEN_ADDRESSES.cUSD.toLowerCase_()
      const decimals = isCUSD ? 18 : 6
      const c = {
         id,

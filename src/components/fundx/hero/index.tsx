@@ -1,9 +1,9 @@
 "use client"
 
-import { HeroHeadline } from "./HeroHeadline"
-import { HeroDeckSlot } from "./HeroDeckSlot"
-import { HeroCTAs } from "./HeroCTAs"
 import { HeroBadge } from "./HeroBadge"
+import { HeroHeadline } from "./HeroHeadline"
+import { HeroCTAs } from "./HeroCTAs"
+import { HeroDeckSlot } from "./HeroDeckSlot"
 import HeroLogoParallax from "./HeroBackdrop"
 
 
@@ -11,7 +11,7 @@ export { HeroDeckSlot }
 
 export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElement | null> }) {
   return (
- <section className="relative pt-28 pb-24 lg:pt-38 lg:pb-32 overflow-hidden bg-slate-50">
+ <section className="relative pt-28 pb-24 lg:pt-38 lg:pb-32 overflow-hidden bg-slate_-50">
 
       {/* Background logo */}
         <HeroLogoParallax />
@@ -20,7 +20,7 @@ export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElem
         <HeroBadge />
         <HeroHeadline />
         <HeroDeckSlot slotRef={deckSlotRef} />
-        <p className="text-xl text-slate-800 max-w-2xl mx-auto leading-relaxed mb-10">
+        <p className="text-xl text-slate_-800 max-w-2xl mx-auto leading-relaxed mb-10">
           Programmable escrow. Stable capital. Conditions enforced on-chain — funds release only when your terms are met.
         </p>
         <HeroCTAs />
