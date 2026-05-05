@@ -18,15 +18,15 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children_,
+  children,
 }: Readonly<{
-  children_: React.ReactNode;
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={jakarta.variable}>
         <Providers>
-          {children_}
+          {children}
         </Providers>
         <Toaster position="bottom-right" richColors />
       </body>
