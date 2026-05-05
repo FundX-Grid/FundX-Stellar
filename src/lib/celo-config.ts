@@ -1,13 +1,13 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit"
-import { celo_ } from "wagmi/chains"
+import { celo } from "wagmi/chains"
 import { http } from "wagmi"
 
 export const config = getDefaultConfig({
   appName: "FundX",
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "placeholder",
-  chains: [celo_],
+  chains: [celo],
   transports: {
-    [celo_.id]: http("https://forno.celo_.org"),
+    [celo.id]: http("https://forno.celo.org"),
   },
 })
 

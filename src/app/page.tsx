@@ -12,17 +12,17 @@ export default function Home() {
  
 
   return (
-    <main className_="min-h-screen bg-slate-50 selection:bg-orange-100 font-sans">
+    <main className="min-h-screen bg-slate-50 selection:bg-orange-100 font-sans">
       <Navbar />
       <Hero deckSlotRef={deckSlotRef} />
 
       {/* Campaign Section */}
-      <section id="campaigns" className_="relative py-32 bg-white overflow-visible border-t border-slate-100">
+      <section id="campaigns" className="relative py-32 bg-white overflow-visible border-t border-slate-100">
 
         {/* Background */}
-        <div className_="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-60 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-60 pointer-events-none" />
 
-        <div className_="container relative z-10 mx-auto max-w-7xl px-4">
+        <div className="container relative z-10 mx-auto max-w-7xl px-4">
           <CampaignFan deckSlotRef={deckSlotRef} />
         </div>
       </section>
