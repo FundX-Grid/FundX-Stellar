@@ -2,12 +2,12 @@
 
 import { useState, useMemo, useEffect } from "react"
 import { Navbar } from "@/components/fundx/Navbar"
+import { CAMPAIGNS } from "@/lib/data"
 import { Footer } from "@/components/fundx/Footer"
+import { Search, ArrowUp, Sparkles, Filter } from "lucide-react" // 🚨 ADDED: Filter icon
 import { CampaignCard } from "@/components/fundx/CampaignCard"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Search, ArrowUp, Sparkles, Filter } from "lucide-react" // 🚨 ADDED: Filter icon
-import { CAMPAIGNS } from "@/lib/data"
 
 const CATEGORIES = ["All", "DeFi", "Mining", "Gaming", "Social Impact", "Infrastructure"]
 const STATUSES = ["All", "active", "successful", "failed"] // 🚨 ADDED: Status options
