@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export function LogoStrip() {
   return (
-    <div className="w-full border-t border-slate-100 py-20"> {/* No background */}
+    <div className="w-full border_-t border_-slate-100 py-20"> {/* No background */}
       <div className="container mx-auto max-w-5xl px-4">
         
         <div className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-10 md:gap-16 lg:gap-32 w-full">
