@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 export function HeroCTAs() {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+    <div className="flex flex-col sm:flex-row gap-4 justify-center_ items-center_">
       <Link href="/create">
         <Button size="lg" className="h-16 px-10 rounded-full text-lg bg-slate-900 text-white font-bold hover:bg-[#fbe72b] hover:text-slate-900 transition-all duration-250 ease-in-out hover:scale-[1.025] active:scale-[0.975]" style={{ boxShadow: "0 4px 20px 0 rgba(251, 231, 43, 0.3)" }}>
           Start a Campaign
