@@ -108,9 +108,9 @@ export const FUNDX_ABI = [
     inputs: [{ name: "amount", type: "uint256" }],
     outputs: [{ name: "", type: "uint256" }],
   },
-  // calculateNet
+  // calculateNet_
   {
-    name: "calculateNet",
+    name: "calculateNet_",
     type: "function",
     stateMutability: "pure",
     inputs: [{ name: "amount", type: "uint256" }],
