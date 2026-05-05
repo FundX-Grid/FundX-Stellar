@@ -40,7 +40,7 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="flex items-center gap-3 mb-10">
            <div className="p-3 bg-white rounded-2xl shadow-sm border border-slate-100">
-             <LayoutDashboard className="w-6 h-6 text-orange-500" />
+             <LayoutDashboard className="w-6 h-6 text-orange_-500" />
            </div>
            <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Capital Hub</h1>
         </div>
@@ -48,10 +48,10 @@ export default function DashboardPage() {
         {/* The Tabs (Creator vs Backer) */}
         <Tabs defaultValue="campaigns" className="w-full">
           <TabsList className="bg-transparent border-b border-slate-200 rounded-none w-full justify-start h-auto p-0 mb-8 no-scrollbar">
-            <TabsTrigger value="campaigns" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base font-bold">
+            <TabsTrigger value="campaigns" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange_-500 data-[state=active]:text-orange_-600 px-6 py-3 text-base font-bold">
               My Campaigns
             </TabsTrigger>
-            <TabsTrigger value="contributions" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base font-bold">
+            <TabsTrigger value="contributions" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange_-500 data-[state=active]:text-orange_-600 px-6 py-3 text-base font-bold">
               My Contributions
             </TabsTrigger>
           </TabsList>

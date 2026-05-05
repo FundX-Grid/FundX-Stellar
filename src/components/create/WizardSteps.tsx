@@ -65,7 +65,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
          <div className="space-y-4">
             <Textarea 
                placeholder="Tell us about your past experience, previous projects, and what drives you..." 
-               className="h-64 rounded-xl resize-none p-5 text-base leading-relaxed"
+               className="h-64 rounded-xl resize_-none p-5 text-base leading-relaxed"
                value={formData.creatorBio}
                onChange={(e) => setFormData({...formData, creatorBio: e.target.value})}
             />
@@ -153,7 +153,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                <Label>The Problem & Solution</Label>
                <Textarea 
                   placeholder="Dive deep. What specific problem are you solving? How does it work? Why now?" 
-                  className="h-64 rounded-xl resize-none p-5 text-base leading-relaxed"
+                  className="h-64 rounded-xl resize_-none p-5 text-base leading-relaxed"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                />
@@ -176,7 +176,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                <Label>Budget Breakdown</Label>
                <Textarea 
                   placeholder="e.g., 60% Full-Stack Dev ($6,000), 20% Audits ($2,000), 20% Infrastructure ($2,000)..." 
-                  className="h-32 rounded-xl resize-none p-4"
+                  className="h-32 rounded-xl resize_-none p-4"
                   value={formData.budgetBreakdown}
                   onChange={(e) => setFormData({...formData, budgetBreakdown: e.target.value})}
                />
@@ -185,7 +185,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                <Label>Product Roadmap</Label>
                <Textarea 
                   placeholder="Month 1: Smart contracts finalized. Month 2: Testnet launch. Month 3: Mainnet deployment..." 
-                  className="h-32 rounded-xl resize-none p-4"
+                  className="h-32 rounded-xl resize_-none p-4"
                   value={formData.roadmap}
                   onChange={(e) => setFormData({...formData, roadmap: e.target.value})}
                />

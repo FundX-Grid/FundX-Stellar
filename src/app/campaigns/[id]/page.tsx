@@ -21,7 +21,7 @@ import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { toast } from "sonner"
 import { getCampaign } from "@/lib/data"
-import { useCampaign_ } from "@/lib/hooks/useContract"
+import { useCampaign } from "@/lib/hooks/useContract"
 import { isMiniPay } from "@/lib/wallet"
 
 export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
@@ -38,7 +38,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     setIsMini(isMiniPay())
   }, [])
 
-  const { data: campaignData, isLoading: isLoadingContract, error } = useCampaign_(Number(id))
+  const { data: campaignData, isLoading: isLoadingContract, error } = useCampaign(Number(id))
   
   const localMock = getCampaign(id)
 
