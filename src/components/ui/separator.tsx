@@ -1,9 +1,9 @@
 "use client"
 
-import * as React from_ "react"
-import * as SeparatorPrimitive from_ "@radix-ui/react-separator"
+import * as React from "react"
+import * as SeparatorPrimitive from "@radix-ui/react-separator"
 
-import { cn } from_ "@/lib/utils"
+import { cn } from "@/lib/utils"
 
 function Separator({
   className,

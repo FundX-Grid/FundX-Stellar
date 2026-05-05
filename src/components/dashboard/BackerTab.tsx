@@ -31,48 +31,19 @@ const MOCK_CONTRIBUTIONS: BackerContribution[] = [
   { id: "mock-3", title: "DeFi Yield Aggregator", image: "/campaign-2.jpg", myContribution: 250, totalRaised: 55000, goal: 50000, currency: "cUSD", model: "Flexible Model", status: "successful" }
 ];
 
+const formatMoney = (amount: number, currency: string) => {
+  return `$${amount.toLocaleString()} ${currency}`;
+};
+
 function RefundCard({ contribution }: { contribution: BackerContribution }) {
   const { writeContractAsync } = useWriteContract();
   const { isConnected } = useAccount();
 
-export function BackerTab() {
-  const { address } = useAccount();
-
-function SuccessfulContributionCard({ contribution }: { contribution: BackerContribution }) {
-  return (
-    <div className="bg-slate-50 p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[inset_0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden transition-all duration-500">
-       <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-slate-200 opacity-50 z-0 select-none pointer-events-none tracking-tighter leading-none">SUCCESS</div>
-       <CheckCircle2 strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-slate-300 opacity-20 z-0 pointer-events-none" />
-       <div className="absolute top-0 left-0 w-2 h-full bg-slate-300 z-10" />
-       
-       <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
-          <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-300 shadow-sm group-hover:shadow-md transition-shadow">
-             <Image src={contribution.image} alt={contribution.title} fill className="object-cover" />
-          </div>
-          <div className="space-y-3 w-full">
-             <div className="flex items-center gap-3 mb-2">
-                <span className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                   <CheckCircle2 className="w-3.5 h-3.5 text-slate-500" /> Funded
-                </span>
-                <span className="text-slate-400 text-sm font-semibold">{contribution.model}</span>
-             </div>
-             <h3 className="text-3xl font-bold text-slate-700 tracking-tight">{contribution.title}</h3>
-             <div className="flex items-center gap-4 text-sm mt-4">
-                <div className="font-semibold text-slate-600 bg-white/80 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
-                   My Contribution: {formatMoney(contribution.myContribution, contribution.currency)}
-                </div>
-             </div>
-          </div>
-       </div>
-       
-       <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
-          <Button variant="outline" disabled className="w-full md:w-auto h-16 px-10 rounded-xl bg-white border-slate-200 text-slate-600 font-bold shadow-sm cursor-not-allowed text-lg">
-             View Project
-          </Button>
-       </div>
-    </div>
-  )
-}
+  const handleRefund = async (id: string) => {
+    if (!isConnected) {
+       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
+       return;
+    }
 
     if (id.startsWith("mock-")) {
        toast.info("Mock Campaign", { description: "Cannot claim refund for a mock campaign." });
@@ -173,15 +144,44 @@ function ActiveContributionCard({ contribution }: { contribution: BackerContribu
   )
 }
 
-  const handleRefund = async (id: string) => {
-    if (!isConnected) {
-       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
-       return;
-    }
+function SuccessfulContributionCard({ contribution }: { contribution: BackerContribution }) {
+  return (
+    <div className="bg-slate-50 p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[inset_0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden transition-all duration-500">
+       <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-slate-200 opacity-50 z-0 select-none pointer-events-none tracking-tighter leading-none">SUCCESS</div>
+       <CheckCircle2 strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-slate-300 opacity-20 z-0 pointer-events-none" />
+       <div className="absolute top-0 left-0 w-2 h-full bg-slate-300 z-10" />
+       
+       <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
+          <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-300 shadow-sm group-hover:shadow-md transition-shadow">
+             <Image src={contribution.image} alt={contribution.title} fill className="object-cover" />
+          </div>
+          <div className="space-y-3 w-full">
+             <div className="flex items-center gap-3 mb-2">
+                <span className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                   <CheckCircle2 className="w-3.5 h-3.5 text-slate-500" /> Funded
+                </span>
+                <span className="text-slate-400 text-sm font-semibold">{contribution.model}</span>
+             </div>
+             <h3 className="text-3xl font-bold text-slate-700 tracking-tight">{contribution.title}</h3>
+             <div className="flex items-center gap-4 text-sm mt-4">
+                <div className="font-semibold text-slate-600 bg-white/80 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
+                   My Contribution: {formatMoney(contribution.myContribution, contribution.currency)}
+                </div>
+             </div>
+          </div>
+       </div>
+       
+       <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
+          <Button variant="outline" disabled className="w-full md:w-auto h-16 px-10 rounded-xl bg-white border-slate-200 text-slate-600 font-bold shadow-sm cursor-not-allowed text-lg">
+             View Project
+          </Button>
+       </div>
+    </div>
+  )
+}
 
-const formatMoney = (amount: number, currency: string) => {
-  return `$${amount.toLocaleString()} ${currency}`;
-};
+export function BackerTab() {
+  const { address } = useAccount();
 
   const { data: countData } = useCampaignCount();
   const count = Number(countData || 0);
