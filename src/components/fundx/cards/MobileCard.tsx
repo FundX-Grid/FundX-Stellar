@@ -10,7 +10,7 @@ interface MobileCardProps {
 
 export function MobileCard({ campaign, progress }: MobileCardProps) {
   return (
-    <div className="w-full_ bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden flex flex-col">
+    <div className="w-full bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden flex flex-col">
       <div className="relative h-48 bg-slate-100">
         <div className="absolute inset-0 flex items-center justify-center text-slate-300 text-sm font-bold">
           [Image]
@@ -23,9 +23,9 @@ export function MobileCard({ campaign, progress }: MobileCardProps) {
           {campaign.description}
         </p>
 
-        <div className="w-full_ bg-slate-100 rounded-full_ h-2 overflow-hidden">
+        <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
           <div
-            className="bg-gradient-tush h-full_ rounded-full_"
+            className="bg-gradient-tush h-full rounded-full"
             style={{ width: `${progress}%` }}
           />
         </div>

@@ -19,7 +19,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   // STEP 1: IDENTITY
   if (step === 1) {
     return (
-      <div className="space-y-6 animate-in fade-in slide_-in-from-right-4 duration-500">
+      <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-6">
             <h2 className="text-2xl font-bold text-slate-900">Who is building this?</h2>
             <p className="text-slate-500 text-sm">Let's get your basic details and social proof.</p>
@@ -57,7 +57,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   // STEP 2: BIO (Lots of room to type)
   if (step === 2) {
     return (
-      <div className="space-y-6 animate-in fade-in slide_-in-from-right-4 duration-500">
+      <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-6">
             <h2 className="text-2xl font-bold text-slate-900">Your Background</h2>
             <p className="text-slate-500 text-sm">Why are you the right person or team to build this?</p>
@@ -77,7 +77,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
  // STEP 3: BASICS
   if (step === 3) {
     return (
-      <div className="space-y-6 animate-in fade-in slide_-in-from-right-4 duration-500">
+      <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-6">
             <h2 className="text-2xl font-bold text-slate-900">Project Basics</h2>
             <p className="text-slate-500 text-sm">Define what you are building and give it a face.</p>
@@ -139,7 +139,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   // STEP 4: THE STORY (Massive text box)
   if (step === 4) {
     return (
-      <div className="space-y-6 animate-in fade-in slide_-in-from-right-4 duration-500">
+      <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-4">
             <h2 className="text-2xl font-bold text-slate-900">The Pitch</h2>
             <p className="text-slate-500 text-sm">Explain the problem and how your product fixes it.</p>
@@ -166,7 +166,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   // STEP 5: EXECUTION (Stacked big boxes)
   if (step === 5) {
     return (
-      <div className="space-y-6 animate-in fade-in slide_-in-from-right-4 duration-500">
+      <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-4">
             <h2 className="text-2xl font-bold text-slate-900">Execution Plan</h2>
             <p className="text-slate-500 text-sm">Show backers exactly how you will spend their funds and hit your goals.</p>
@@ -198,7 +198,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
 
  if (step === 6) {
     return (
-      <div className="space-y-6 animate-in fade-in slide_-in-from-right-4 duration-500">
+      <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-6">
             <h2 className="text-2xl font-bold text-slate-900">Funding Goals</h2>
             <p className="text-slate-500 text-sm">Set your target and define your on-chain rules.</p>
