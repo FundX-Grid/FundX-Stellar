@@ -23,7 +23,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.35.0",
-    "@jadonamite/chessify-sdk": "^1.0.4",
     "@jadonamite/fundxagon-sdk": "^1.0.4",
     "@jadonamite/stacks-core": "^1.0.4",
     "lucide-react": "^0.563.0",
