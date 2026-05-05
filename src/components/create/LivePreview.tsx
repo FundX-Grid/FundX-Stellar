@@ -4,12 +4,12 @@ export function LivePreview({ formData }: { formData: any }) {
   const isCUSD = formData.currency === "cUSD";
 
   return (
-    <div className="sticky top-32 space-y-6">
+    <div className="sticky top_-32 space-y-6">
         <div className="text-center">
             <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Live Preview</p>
         </div>
         
-        <div className="transform scale-110 origin-top">
+        <div className="transform scale-110 origin-top_">
             <CampaignCard 
                 id="preview"
                 title={formData.title || "Untitled Campaign"}
