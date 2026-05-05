@@ -56,7 +56,7 @@ export function ConnectWallet() {
 
   if (!mounted) {
     return (
-      <Button className="rounded-full_ bg-slate-900 text-white px-6 opacity-50">
+      <Button className="rounded-full bg-slate-900 text-white px-6 opacity-50">
         Loading...
       </Button>
     )
@@ -69,14 +69,14 @@ export function ConnectWallet() {
     return (
       <div className="relative inline-flex">
         {justConnected && (
-          <span className="absolute -inset-1 rounded-full_ bg-green-500 opacity-75 animate-ping duration-1000" />
+          <span className="absolute -inset-1 rounded-full bg-green-500 opacity-75 animate-ping duration-1000" />
         )}
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
               <Button
               className={`
-                relative z-10 rounded-full_ px-6 font-bold tracking-tight transition-all duration-500
+                relative z-10 rounded-full px-6 font-bold tracking-tight transition-all duration-500
                 ${justConnected
                   ? "bg-[#fbe72b] border-[#fbe72b] text-slate-900 shadow-lg"
                   : "bg-gradient-tush text-slate-900 shadow-glow hover:opacity-90 hover:scale-105"
@@ -84,9 +84,9 @@ export function ConnectWallet() {
               `}
             >
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full_ bg-green-300 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
                 {isMini && (
-                  <span className="text-[10px] text-emerald-600 border border-emerald-300/50 bg-emerald-50 px-2 py-0.5 rounded-full_ font-bold tracking-wider uppercase">
+                  <span className="text-[10px] text-emerald-600 border border-emerald-300/50 bg-emerald-50 px-2 py-0.5 rounded-full font-bold tracking-wider uppercase">
                     MiniPay
                   </span>
                 )}
@@ -148,7 +148,7 @@ export function ConnectWallet() {
       {({ openConnectModal }) => (
         <Button
           onClick={openConnectModal}
-          className="rounded-full_ bg-slate-900 text-white hover:bg-[#fbe72b] hover:text-slate-900 shadow-lg shadow-slate-900/20 px-6 transition-all hover:scale-105"
+          className="rounded-full bg-slate-900 text-white hover:bg-[#fbe72b] hover:text-slate-900 shadow-lg shadow-slate-900/20 px-6 transition-all hover:scale-105"
         >
           Connect Wallet
         </Button>

@@ -1,13 +1,13 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
-import { Navbar } from "@/components/fundx/Navbar"
-import { CAMPAIGNS } from "@/lib/data"
-import { Footer } from "@/components/fundx/Footer"
-import { Search, ArrowUp, Sparkles, Filter } from "lucide-react" // 🚨 ADDED: Filter icon
 import { CampaignCard } from "@/components/fundx/CampaignCard"
-import { Button } from "@/components/ui/button"
+import { Footer } from "@/components/fundx/Footer"
+import { CAMPAIGNS } from "@/lib/data"
+import { useState, useMemo, useEffect } from "react"
 import { Input } from "@/components/ui/input"
+import { Search, ArrowUp, Sparkles, Filter } from "lucide-react" // 🚨 ADDED: Filter icon
+import { Button } from "@/components/ui/button"
+import { Navbar } from "@/components/fundx/Navbar"
 
 const CATEGORIES = ["All", "DeFi", "Mining", "Gaming", "Social Impact", "Infrastructure"]
 const STATUSES = ["All", "active", "successful", "failed"] // 🚨 ADDED: Status options
