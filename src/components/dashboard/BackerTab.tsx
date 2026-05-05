@@ -80,11 +80,11 @@ function RefundCard({ contribution }: { contribution: BackerContribution }) {
                 <span className="px-3 py-1 rounded-lg bg-blue-50 border border-blue-100/50 text-blue-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
                    <ShieldAlert className="w-3.5 h-3.5 text-blue-500" /> Goal Missed
                 </span>
-                <span className="text-slate-400 text-sm font-semibold_">{contribution.model}</span>
+                <span className="text-slate-400 text-sm font-semibold">{contribution.model}</span>
              </div>
              <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{contribution.title}</h3>
              <div className="flex items-center gap-4 text-sm mt-4">
-                <div className="font-semibold_ text-blue-900 bg-blue-50 px-5 py-2.5 rounded-xl border border-blue-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
+                <div className="font-semibold text-blue-900 bg-blue-50 px-5 py-2.5 rounded-xl border border-blue-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                    My Contribution: <span className="text-blue-600 font-extrabold">{formatMoney(contribution.myContribution, contribution.currency)}</span>
                 </div>
                 <div className="text-slate-500 font-medium text-base">Project raised {formatMoney(contribution.totalRaised, contribution.currency)}</div>
@@ -119,11 +119,11 @@ function ActiveContributionCard({ contribution }: { contribution: BackerContribu
                 <span className="px-3 py-1 rounded-lg bg-orange-50 border border-orange-100/50 text-orange-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
                    <Clock className="w-3.5 h-3.5" /> Funding
                 </span>
-                <span className="text-slate-400 text-sm font-semibold_">{contribution.model}</span>
+                <span className="text-slate-400 text-sm font-semibold">{contribution.model}</span>
              </div>
              <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{contribution.title}</h3>
              <div className="flex items-center gap-4 text-sm mt-4">
-                <div className="font-semibold_ text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
+                <div className="font-semibold text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                    My Contribution: <span className="text-orange-600 font-extrabold">{formatMoney(contribution.myContribution, contribution.currency)}</span>
                 </div>
                 <div className="text-slate-500 font-medium text-base">Goal: {contribution.goal.toLocaleString()} {contribution.currency}</div>
@@ -160,11 +160,11 @@ function SuccessfulContributionCard({ contribution }: { contribution: BackerCont
                 <span className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
                    <CheckCircle2 className="w-3.5 h-3.5 text-slate-500" /> Funded
                 </span>
-                <span className="text-slate-400 text-sm font-semibold_">{contribution.model}</span>
+                <span className="text-slate-400 text-sm font-semibold">{contribution.model}</span>
              </div>
              <h3 className="text-3xl font-bold text-slate-700 tracking-tight">{contribution.title}</h3>
              <div className="flex items-center gap-4 text-sm mt-4">
-                <div className="font-semibold_ text-slate-600 bg-white/80 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
+                <div className="font-semibold text-slate-600 bg-white/80 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                    My Contribution: {formatMoney(contribution.myContribution, contribution.currency)}
                 </div>
              </div>
