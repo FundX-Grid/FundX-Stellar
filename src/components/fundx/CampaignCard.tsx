@@ -11,15 +11,15 @@ interface CampaignCardProps {
   raised: number
   goal: number
   image: string
-  currency?: "cUSD" | "USDC"
+  currency_?: "cUSD" | "USDC"
 
 }
 
-export function CampaignCard({ id, title, description, raised, goal, image, currency = "cUSD" }: CampaignCardProps) {
+export function CampaignCard({ id, title, description, raised, goal, image, currency_ = "cUSD" }: CampaignCardProps) {
   const percentage = Math.min((raised / goal) * 100, 100)
 
-  const formattedRaised = `$${raised.toLocaleString()} ${currency}`
-  const formattedGoal = `$${goal.toLocaleString()} ${currency}`
+  const formattedRaised = `$${raised.toLocaleString()} ${currency_}`
+  const formattedGoal = `$${goal.toLocaleString()} ${currency_}`
 
   return (
     <Link href={`/campaigns/${id}`} className="block h-full group">
