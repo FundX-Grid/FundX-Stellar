@@ -95,12 +95,12 @@ export function CreatorTab() {
               const goal = Number(formatUnits(camp.goal, decimals));
               const raised = Number(formatUnits(camp.totalRaised, decimals));
               const id = String(index + 1);
-              const deadline_ = Number(camp.deadline_);
+              const deadline = Number(camp.deadline);
               
               let status: CampaignStatus = "active";
               
               const now = Date.now() / 1000;
-              const isPastDeadline = deadline_ <= now;
+              const isPastDeadline = deadline <= now;
               
               if (camp.withdrawn) {
                  status = "successful";
@@ -114,7 +114,7 @@ export function CreatorTab() {
                  status = "failed";
               }
               
-              const daysRemaining = Math.max(0, Math.floor((deadline_ - now) / 86400));
+              const daysRemaining = Math.max(0, Math.floor((deadline - now) / 86400));
               
               liveCreatorCampaigns.push({
                  id,
