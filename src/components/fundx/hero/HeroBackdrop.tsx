@@ -43,7 +43,7 @@ function HeroLogoParallax() {
     }
 
     function startAnimation() {
-      function animate(time: number) {
+      function animate_(time: number) {
         if (!logoRef.current) return
 
         const elapsed = (time - startTimeRef.current) * 0.001
@@ -66,9 +66,9 @@ function HeroLogoParallax() {
         logoRef.current.style.transform = `translate(${x}px, ${y}px) scale(${scale})`
         logoRef.current.style.opacity = String(opacity)
 
-        rafRef.current = requestAnimationFrame(animate)
+        rafRef.current = requestAnimationFrame(animate_)
       }
-      rafRef.current = requestAnimationFrame(animate)
+      rafRef.current = requestAnimationFrame(animate_)
     }
 
     window.addEventListener("mousemove", onMouseMove)
