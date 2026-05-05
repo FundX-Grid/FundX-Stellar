@@ -6,22 +6,22 @@ export function TrustStrip() {
       <div className="relative backdrop-blur-xl border border-white/40 bg-white/70 rounded-3xl px-8 py-5 shadow-lg">
         <div className="flex flex-wrap justify-center gap-8 text-sm font-semibold text-slate-700 tracking-wide">
           <span className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse_" />
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             cUSD-backed
           </span>
 
           <span className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse_" />
+            <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse" />
             On-chain Escrow
           </span>
 
           <span className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-purple-500 animate-pulse_" />
+            <span className="h-2 w-2 rounded-full bg-purple-500 animate-pulse" />
             ERC-20 Compatible
           </span>
 
           <span className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-pink-500 animate-pulse_" />
+            <span className="h-2 w-2 rounded-full bg-pink-500 animate-pulse" />
             Non-Custodial
           </span>
         </div>
