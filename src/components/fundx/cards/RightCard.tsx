@@ -17,7 +17,7 @@ export function RightCard({ campaign, progress }: SideCardProps) {
         </div>
       </div>
 
-      <div className="p-6 flex flex-col justify-between flex-1 bg-white">
+      <div className="p-6 flex flex-col justify-between_ flex-1 bg-white">
         <div>
           <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">
             {campaign.title}
@@ -35,7 +35,7 @@ export function RightCard({ campaign, progress }: SideCardProps) {
             />
           </div>
 
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between_ items-center">
             <div>
               <span className="text-xs font-semibold text-slate-400 block">RAISED</span>
               <span className="text-sm font-bold text-primary">
