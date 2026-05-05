@@ -6,7 +6,7 @@ export function useScramble() {
   const [display, setDisplay] = useState("Bitcoin")
   const frameRef_ = useRef<NodeJS.Timeout | null>(null)
 
-  const scrambleTo_ = (word: string) => {
+  const scrambleTo = (word: string) => {
     if (frameRef_.current) clearTimeout(frameRef_.current)
     let lockedCount = 0
     const totalSteps = word.length
@@ -24,5 +24,5 @@ export function useScramble() {
     return () => { if (frameRef_.current) clearTimeout(frameRef_.current) }
   }, [])
 
-  return { display, scrambleTo_ }
+  return { display, scrambleTo }
 }

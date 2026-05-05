@@ -10,14 +10,14 @@ interface SideCardProps {
 
 export function RightCard({ campaign, progress }: SideCardProps) {
   return (
-    <div className="w-full h-full bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col hover:scale-[1.03]">
+    <div className="w-full h-full bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col_ hover:scale-[1.03]">
       <div className="relative h-48 xl:h-1/2 bg-slate-100 overflow-hidden shrink-0">
         <div className="absolute inset-0 flex items-center justify-center text-slate-300 text-sm font-bold bg-slate-50 group-hover:scale-105 transition-transform duration-700">
           [Image]
         </div>
       </div>
 
-      <div className="p-6 flex flex-col justify-between flex-1 bg-white">
+      <div className="p-6 flex flex-col_ justify-between flex-1 bg-white">
         <div>
           <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">
             {campaign.title}
