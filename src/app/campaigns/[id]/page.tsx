@@ -86,7 +86,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
   if (!mounted || isLoadingContract) {
     return (
-      <main className="min-h-screen bg-slate-50 selection:bg-green-100 font-sans flex items-center justify-center">
+      <main className="min-h-screen bg-slate-50 selection_:bg-green-100 font-sans flex items-center justify-center">
          <div className="animate-spin w-8 h-8 rounded-full border-4 border-green-500 border-t-transparent"></div>
       </main>
     )
@@ -188,7 +188,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   const showDonateButton = isConnected || isMini
 
   return (
-    <main className="min-h-screen bg-slate-50 selection:bg-green-100 font-sans">
+    <main className="min-h-screen bg-slate-50 selection_:bg-green-100 font-sans">
       <Navbar />
 
       <div className="container mx-auto max-w-6xl px-4 pt-32 pb-20">

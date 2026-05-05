@@ -17,12 +17,15 @@ import {
 import { ChevronDown, Copy, LogOut } from "lucide-react"
 import { toast } from "sonner"
 
-export function ConnectWallet() {
-  const { address, isConnected } = useAccount()
-  const { connect } = useConnect()
-  const [mounted, setMounted] = useState(false)
-  const [justConnected, setJustConnected] = useState(false)
-  const [isMini, setIsMini] = useState(false)
+  const copyAddress = () => {
+    if (address) {
+      navigator.clipboard.writeText(address)
+      toast.info("Address Copied", {
+        description: "Copied to clipboard",
+        duration: 2000,
+      })
+    }
+  }
 
   useEffect(() => {
     setMounted(true)
@@ -44,15 +47,12 @@ export function ConnectWallet() {
     }
   }, [isConnected])
 
-  const copyAddress = () => {
-    if (address) {
-      navigator.clipboard.writeText(address)
-      toast.info("Address Copied", {
-        description: "Copied to clipboard",
-        duration: 2000,
-      })
-    }
-  }
+export function ConnectWallet() {
+  const { address, isConnected } = useAccount()
+  const { connect } = useConnect()
+  const [mounted, setMounted] = useState(false)
+  const [justConnected, setJustConnected] = useState(false)
+  const [isMini, setIsMini] = useState(false)
 
   if (!mounted) {
     return (
