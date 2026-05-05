@@ -57,9 +57,9 @@ const MOCK_CREATOR_CAMPAIGNS: CreatorCampaign[] = [
   }
 ];
 
-  const formatMoney = (amount: number, currency: string) => {
-    return `$${amount.toLocaleString()} ${currency}`;
-  };
+export function CreatorTab() {
+  const { writeContractAsync } = useWriteContract();
+  const { isConnected, address } = useAccount();
 
   const { data: countData } = useCampaignCount();
   const count = Number(countData || 0);
@@ -167,9 +167,9 @@ const MOCK_CREATOR_CAMPAIGNS: CreatorCampaign[] = [
     }
   };
 
-export function CreatorTab() {
-  const { writeContractAsync } = useWriteContract();
-  const { isConnected, address } = useAccount();
+  const formatMoney = (amount: number, currency: string) => {
+    return `$${amount.toLocaleString()} ${currency}`;
+  };
 
   if (isLoading && count > 0) {
     return <TabsContent value="campaigns"><div className="p-8 text-center text-slate-500">Loading your campaigns...</div></TabsContent>
