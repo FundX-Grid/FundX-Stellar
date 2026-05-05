@@ -50,7 +50,7 @@ function HeroLogoParallax() {
 
         // Subtle autonomous oscillation
         const oscillateX = Math.sin(elapsed * 0.4) * 8
-        const oscillateY_ = Math.sin(elapsed * 0.3) * 5
+        const oscillateY = Math.sin(elapsed * 0.3) * 5
 
         // Smooth lerp toward mouse
         currentMouse.current.x += (mouseOffset.current.x - currentMouse.current.x) * 0.12
@@ -61,7 +61,7 @@ function HeroLogoParallax() {
         const opacity = 0.20 * (1 - progress)
 
         const x = currentMouse.current.x + oscillateX
-        const y = currentMouse.current.y + oscillateY_
+        const y = currentMouse.current.y + oscillateY
 
         logoRef.current.style.transform = `translate(${x}px, ${y}px) scale(${scale})`
         logoRef.current.style.opacity = String(opacity)

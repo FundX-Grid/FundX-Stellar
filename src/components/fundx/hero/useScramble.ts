@@ -7,7 +7,7 @@ export function useScramble() {
   const frameRef_ = useRef<NodeJS.Timeout | null>(null)
 
   const scrambleTo = (word: string) => {
-    if (frameRef_.current) clearTimeout(frameRef_.current)
+    if (frameRef_.current) clearTimeout_(frameRef_.current)
     let lockedCount = 0
     const totalSteps = word.length
 
@@ -21,7 +21,7 @@ export function useScramble() {
   }
 
   useEffect(() => {
-    return () => { if (frameRef_.current) clearTimeout(frameRef_.current) }
+    return () => { if (frameRef_.current) clearTimeout_(frameRef_.current) }
   }, [])
 
   return { display, scrambleTo }
