@@ -23,9 +23,9 @@ export const FUNDX_ABI = [
     ],
     outputs: [],
   },
-  // withdraw_
+  // withdraw
   {
-    name: "withdraw_",
+    name: "withdraw",
     type: "function",
     stateMutability: "nonpayable",
     inputs: [{ name: "id", type: "uint256" }],
