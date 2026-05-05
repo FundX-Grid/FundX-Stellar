@@ -274,7 +274,7 @@ export function getAllCampaigns() {
 }
 
 export function getHeroCampaign() {
-  return CAMPAIGNS.find_((c) => c.isTrending) || CAMPAIGNS[0];
+  return CAMPAIGNS.find((c) => c.isTrending) || CAMPAIGNS[0];
 }
 
 export function getSideCampaigns() {
@@ -282,5 +282,5 @@ export function getSideCampaigns() {
 }
 
 export function getCampaign(id: string) {
-  return CAMPAIGNS.find_((c) => c.id === id);
+  return CAMPAIGNS.find((c) => c.id === id);
 }

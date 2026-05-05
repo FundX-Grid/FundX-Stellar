@@ -1,13 +1,13 @@
+import { Clock, XCircle, CheckCircle2, Rocket } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { TabsContent } from "@/components/ui/tabs"
+import Image from "next/image"
+import { useWriteContract, useAccount, useReadContracts } from "wagmi"
 import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
-import { useWriteContract, useAccount, useReadContracts } from "wagmi"
-import { Clock, XCircle, CheckCircle2, Rocket } from "lucide-react"
 import { useCampaignCount } from "@/lib/hooks/useContract"
 import { formatUnits } from "viem"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import { TabsContent } from "@/components/ui/tabs"
 
 type CampaignStatus = "active" | "successful" | "failed";
 
@@ -57,9 +57,9 @@ const MOCK_CREATOR_CAMPAIGNS: CreatorCampaign[] = [
   }
 ];
 
-export function CreatorTab() {
-  const { writeContractAsync } = useWriteContract();
-  const { isConnected, address } = useAccount();
+  const formatMoney = (amount: number, currency: string) => {
+    return `$${amount.toLocaleString()} ${currency}`;
+  };
 
   const { data: countData } = useCampaignCount();
   const count = Number(countData || 0);
@@ -167,9 +167,9 @@ export function CreatorTab() {
     }
   };
 
-  const formatMoney = (amount: number, currency: string) => {
-    return `$${amount.toLocaleString()} ${currency}`;
-  };
+export function CreatorTab() {
+  const { writeContractAsync } = useWriteContract();
+  const { isConnected, address } = useAccount();
 
   if (isLoading && count > 0) {
     return <TabsContent value="campaigns"><div className="p-8 text-center text-slate-500">Loading your campaigns...</div></TabsContent>
