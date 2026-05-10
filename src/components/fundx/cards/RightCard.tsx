@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Campaign } from "@/lib/data"
 import { ArrowRight } from "lucide-react"
+import { Campaign } from "@/lib/data"
 
 interface SideCardProps {
   campaign: Campaign

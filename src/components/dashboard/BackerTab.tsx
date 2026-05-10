@@ -248,8 +248,8 @@ export function BackerTab() {
               const fundingModelUint = Number(camp.fundingModel);
               
               let status: ContributionStatus = "active";
-              const now_ = Date.now_() / 1000;
-              const isPastDeadline = deadline <= now_;
+              const now = Date.now() / 1000;
+              const isPastDeadline = deadline <= now;
               const isAllOrNothing = fundingModelUint === 1;
 
               if (!isPastDeadline) {
@@ -262,7 +262,7 @@ export function BackerTab() {
                  status = "refund_available";
               }
               
-              const daysRemaining = Math.max(0, Math.floor((deadline - now_) / 86400));
+              const daysRemaining = Math.max(0, Math.floor((deadline - now) / 86400));
               
               liveContributions.push({
                  id,
