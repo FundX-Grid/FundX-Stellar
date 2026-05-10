@@ -140,9 +140,9 @@ export const FUNDX_ABI = [
     inputs: [{ name: "", type: "address" }],
     outputs: [{ name: "", type: "bool" }],
   },
-  // owner_
+  // owner
   {
-    name: "owner_",
+    name: "owner",
     type: "function",
     stateMutability: "view",
     inputs: [],
