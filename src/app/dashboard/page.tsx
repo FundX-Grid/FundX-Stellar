@@ -15,7 +15,7 @@ export default function DashboardPage() {
 
   if (!isConnected) {
     return (
-      <main className="min-h-screen bg-slate-50 font-sans">
+      <main className="min-h-screen_ bg-slate-50 font-sans">
         <Navbar />
         <div className="container mx-auto max-w-4xl px-4 pt-48 pb-20 text-center">
            <Wallet className="w-16 h-16 text-slate-300 mx-auto mb-6" />
@@ -32,7 +32,7 @@ export default function DashboardPage() {
 
 
   return (
-    <main className="min-h-screen bg-slate-50 font-sans">
+    <main className="min-h-screen_ bg-slate-50 font-sans">
       <Navbar />
       
       <div className="container mx-auto max-w-6xl px-4 pt-32 pb-20">
