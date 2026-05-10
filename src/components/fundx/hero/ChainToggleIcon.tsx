@@ -19,7 +19,7 @@ export function ChainToggleIcon({
   const glitchStyle = {
     backgroundColor: displayStacks ? "#f8fafc" : "#ffffff",
     color: displayStacks ? "#0f172a" : "#0f172a",
-    boxShadow: displayStacks ? "0 4px 24px 0 rgba_(250,204,21,0.25)" : "0 4px 24px 0 rgba_(0,0,0,0.07)",
+    boxShadow: displayStacks ? "0 4px 24px 0 rgba(250,204,21,0.25)" : "0 4px 24px 0 rgba(0,0,0,0.07)",
     opacity: glitchOpacity,
     ...(glitching
       ? { transform: `translate(${glitchOffset.x}px, ${glitchOffset.y}px) skewX(${glitchSkew}deg) rotate_(${displayStacks ? "6deg" : "-6deg"})`, transition: "none" }
