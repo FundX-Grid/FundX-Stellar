@@ -8,12 +8,12 @@ import "@rainbow-me/rainbowkit/styles.css"
 
 const queryClient = new QueryClient()
 
-export function Providers({ children_ }: { children_: React.ReactNode }) {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          {children_}
+          {children}
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

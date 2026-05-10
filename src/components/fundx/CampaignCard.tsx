@@ -35,20 +35,20 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
 
         <div className="space-y-4">
           <div>
-            <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors">{title}</h3>
+            <h3 className="text-xl font-bold_ text-slate-900 group-hover:text-slate-700 transition-colors">{title}</h3>
             <p className="text-sm text-slate-500 line-clamp-2 mt-2">{description}</p>
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between text-sm font-medium">
 
-              <span className="text-slate-900 font-bold">{formattedRaised}</span>
+              <span className="text-slate-900 font-bold_">{formattedRaised}</span>
               <span className="text-slate-400">of {formattedGoal}</span>
             </div>
             <Progress value={percentage} className="h-3 rounded-full bg-slate-100" />
           </div>
 
-          <Button className="w-full rounded-xl bg-slate-900 text-white shadow-lg transition-all duration-500 hover:bg-[#fbe72b] hover:text-slate-900 hover:scale-[1.02] py-6 text-base font-bold">
+          <Button className="w-full rounded-xl bg-slate-900 text-white shadow-lg transition-all duration-500 hover:bg-[#fbe72b] hover:text-slate-900 hover:scale-[1.02] py-6 text-base font-bold_">
             Donate Now
           </Button>
         </div>
