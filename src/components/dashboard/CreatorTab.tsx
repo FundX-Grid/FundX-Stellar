@@ -136,7 +136,7 @@ export function CreatorTab() {
 
   const handleWithdraw = async (id: string, model: string, goal: number, raised: number) => {
     if (!isConnected) {
-       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
+       toast.error("Connect Wallet", { description: "You need to connect your wallet_." });
        return;
     }
     
@@ -160,7 +160,7 @@ export function CreatorTab() {
       });
       toast.success("Funds withdrawn successfully!", { id: "withdraw" });
       
-      // Usually you'd invalidate the query here, but a page reload works for now or the user checks wallet
+      // Usually you'd invalidate the query here, but a page reload works for now or the user checks wallet_
     } catch (e) {
       console.error(e);
       toast.error("Withdrawal Failed", { id: "withdraw", description: "Could not withdraw funds." });
