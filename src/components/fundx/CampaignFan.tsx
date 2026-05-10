@@ -17,15 +17,11 @@ interface SideCardProps {
   tilt: "left" | "right"
 }
 
-function getPageOffsetTop(el: HTMLElement): number {
-  let top = 0
-  let current: HTMLElement | null = el
-  while (current) {
-    top += current.offsetTop
-    current = current.offsetParent as HTMLElement | null
-  }
-  return top
-}
+export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const deckRef = useRef<HTMLDivElement>(null)
+  const [deckOffset, setDeckOffset] = useState(0)
+  const [measured, setMeasured] = useState(false)
 
 function SideCard({ campaign, progress, tilt }: SideCardProps) {
   const tiltClass = tilt === "left"
@@ -76,11 +72,15 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
   )
 }
 
-export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const deckRef = useRef<HTMLDivElement>(null)
-  const [deckOffset, setDeckOffset] = useState(0)
-  const [measured, setMeasured] = useState(false)
+function getPageOffsetTop(el: HTMLElement): number {
+  let top = 0
+  let current: HTMLElement | null = el
+  while (current) {
+    top += current.offsetTop
+    current = current.offsetParent as HTMLElement | null
+  }
+  return top
+}
 
   const hero = getHeroCampaign()
   const sideCampaigns = getSideCampaigns()
@@ -141,7 +141,6 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   // At scale 0.15, center card is ~96px wide, side cards are ~45px wide
   // Negative margin of -320px pulls side cards almost completely behind center
   const sideCardMargin = useTransform(smoothProgress, [0, 1], [-200, 0])
-
 
   // Center card sits on top at start (highest z), normalizes at end
   const centerZ = useTransform(smoothProgress, [0, 1], [20, 10])
