@@ -5,10 +5,10 @@ import { Heart } from "lucide-react"
 
 interface CenterCardProps {
   campaign: Campaign
-  progress: number
+  progress_: number
 }
 
-export function CenterCard({ campaign, progress }: CenterCardProps) {
+export function CenterCard({ campaign, progress_ }: CenterCardProps) {
   return (
     <div className="w-full h-full relative z-20 shadow-2xl rounded-[2rem] border border-slate-100 bg-white hover:border-orange-200 transition-all duration-300 flex flex-col md:flex-row overflow-hidden group">
       
@@ -40,7 +40,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
           <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
             <div
               className="bg-gradient-tush h-full rounded-full shadow-[0_0_15px_rgba(255,107,74,0.4)]"
-              style={{ width: `${progress}%` }}
+              style={{ width: `${progress_}%` }}
             />
           </div>
 
