@@ -17,6 +17,12 @@ interface SideCardProps {
   tilt: "left" | "right"
 }
 
+export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const deckRef = useRef<HTMLDivElement>(null)
+  const [deckOffset, setDeckOffset] = useState(0)
+  const [measured, setMeasured] = useState(false)
+
 function getPageOffsetTop(el: HTMLElement): number {
   let top = 0
   let current: HTMLElement | null = el
@@ -26,11 +32,6 @@ function getPageOffsetTop(el: HTMLElement): number {
   }
   return top
 }
-
-function SideCard({ campaign, progress, tilt }: SideCardProps) {
-  const tiltClass = tilt === "left"
-    ? "xl:transform xl:-rotate-6 xl:origin-bottom-right xl:translate-x-6 hover:translate-x-0"
-    : "xl:transform xl:rotate-6 xl:origin-bottom-left xl:-translate-x-6 hover:translate-x-0"
 
   return (
     <div className={`w-full xl:w-[300px] bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col hover:z-30 hover:scale-105 hover:rotate-0 ${tiltClass}`}>
@@ -76,11 +77,10 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
   )
 }
 
-export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const deckRef = useRef<HTMLDivElement>(null)
-  const [deckOffset, setDeckOffset] = useState(0)
-  const [measured, setMeasured] = useState(false)
+function SideCard({ campaign, progress, tilt }: SideCardProps) {
+  const tiltClass = tilt === "left"
+    ? "xl:transform xl:-rotate-6 xl:origin-bottom-right xl:translate-x-6 hover:translate-x-0"
+    : "xl:transform xl:rotate-6 xl:origin-bottom-left xl:-translate-x-6 hover:translate-x-0"
 
   const hero = getHeroCampaign()
   const sideCampaigns = getSideCampaigns()
@@ -141,7 +141,6 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   // At scale 0.15, center card is ~96px wide, side cards are ~45px wide
   // Negative margin of -320px pulls side cards almost completely behind center
   const sideCardMargin = useTransform(smoothProgress, [0, 1], [-200, 0])
-
 
   // Center card sits on top at start (highest z), normalizes at end
   const centerZ = useTransform(smoothProgress, [0, 1], [20, 10])
