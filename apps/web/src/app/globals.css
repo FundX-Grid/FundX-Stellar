@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* 1. Font & Radius */
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  /* 2. The "Soft SaaS" Shadows (Retinted for Purple) */
+  --shadow-soft-xs: 0px 4px 10px rgba(0, 0, 0, 0.03);
+  --shadow-soft-md: 0px 10px 40px -10px rgba(0, 0, 0, 0.08);
+  --shadow-soft-xl: 0px 20px 60px -15px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0px 0px 40px rgba(123, 63, 228, 0.35); /* #7b3fe4 Purple Glow */
+  
+  /* 3. The "Tush" Gradient Utilities */
+  --image-gradient-tush: linear-gradient(135deg, #7b3fe4 0%, #a970ff 100%);
+}
+
+/* Custom Utilities */
+@utility bg-gradient-tush {
+  background-image: var(--image-gradient-tush);
+}
+
+@utility text-gradient-tush {
+  @apply text-[#7b3fe4];
+}
+
+/* Container Setup */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+
+  @media (width >=1400px) {
+    max-width: 1400px;
+  }
+}
+
+/* 4. THE COLOR VARIABLES (Stellar Purple) */
+:root {
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+  --radius: 0.625rem;
+
+  /* Stellar Purple */
+  /* We map standard shadcn variables to our new brand colors */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+
+  /* PRIMARY IS NOW PURPLE (#7B3FE4) */
+  --primary: 262 76% 57%; /* HSL for 7b3fe4 */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 262 76% 57%;
+  /* Ring matches Primary */
+}
+
+/* Tailwind v4 Theme Mapping */
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 font-sans antialiased;
+}
