@@ -3,7 +3,7 @@ interface Window {
     isMetaMask?: boolean
     isMiniPay?: boolean
     request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
-    on: (event: string, handler: (...args: unknown[]) => void) => void
-    removeListener: (event: string, handler: (...args: unknown[]) => void) => void
+    on: (event: string, handler: (...args: unknown[]) => void_) => void_
+    removeListener: (event: string, handler: (...args: unknown[]) => void_) => void_
   }
 }
