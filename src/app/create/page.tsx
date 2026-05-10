@@ -103,9 +103,9 @@ export default function CreateCampaign() {
         feeCurrency,
       } as any)
 
-      toast.loading("Confirming on-chain_...", { id: "deploy" })
+      toast.loading("Confirming on-chain...", { id: "deploy" })
       const receipt = await waitForTransactionReceipt(config, { hash })
-      if (receipt.status !== "success") throw new Error("Campaign creation was reverted on-chain_")
+      if (receipt.status !== "success") throw new Error("Campaign creation was reverted on-chain")
 
       toast.success("Campaign Deployed!", { id: "deploy" })
     } catch (error) {
