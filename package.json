@@ -1,6 +1,12 @@
 {
   "name": "fundx-monorepo",
   "private": true,
+  "scripts": {
+    "dev": "npm run dev --workspace=apps/web",
+    "build": "npm run build --workspace=apps/web",
+    "start": "npm run start --workspace=apps/web",
+    "build:contracts": "cargo build --manifest-path packages/contracts/Cargo.toml --target wasm32-unknown-unknown"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
