@@ -82,8 +82,8 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
   if (!mounted || isLoadingContract) {
     return (
-      <main className="min-h-screen bg-slate-50 selection:bg-green-100 font-sans flex items-center justify-center">
-         <div className="animate-spin w-8 h-8 rounded-full border-4 border-green-500 border-t-transparent"></div>
+      <main className="min-h-screen bg-slate-50 selection:bg-violet-100 font-sans flex items-center justify-center">
+         <div className="animate-spin w-8 h-8 rounded-full border-4 border-violet-500 border-t-transparent"></div>
       </main>
     )
   }
@@ -160,7 +160,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   const showDonateButton = isConnected || isMini
 
   return (
-    <main className="min-h-screen bg-slate-50 selection:bg-green-100 font-sans">
+    <main className="min-h-screen bg-slate-50 selection:bg-violet-100 font-sans">
       <Navbar />
 
       <div className="container mx-auto max-w-6xl px-4 pt-32 pb-20">
@@ -171,7 +171,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
         <div className="mb-10 text-center md:text-left">
           <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-4">
-             <Badge variant="secondary" className="text-green-600 bg-green-50 hover:bg-green-100 px-3 py-1 text-sm border border-green-100">
+             <Badge variant="secondary" className="text-violet-600 bg-violet-50 hover:bg-violet-100 px-3 py-1 text-sm border border-violet-100">
                {campaign.category}
              </Badge>
              <div className="flex items-center text-slate-500 text-sm font-medium">
@@ -212,17 +212,17 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                 </div>
               </div>
               <div className="flex gap-6 text-slate-600 font-medium">
-                 <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-green-500"/> Verified</div>
-                 <div className="flex items-center gap-2"><Users className="w-5 h-5 text-green-500"/> {campaign.backers} Backers</div>
+                 <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-violet-500"/> Verified</div>
+                 <div className="flex items-center gap-2"><Users className="w-5 h-5 text-violet-500"/> {campaign.backers} Backers</div>
               </div>
             </div>
 
             <Tabs defaultValue="story" className="w-full">
               <TabsList className="w-full justify-start bg-transparent border-b border-slate-200 rounded-none h-auto p-0 mb-8 overflow-x-auto">
-                <TabsTrigger value="story" className="rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:text-green-600 px-6 py-3 text-base">
+                <TabsTrigger value="story" className="rounded-none border-b-2 border-transparent data-[state=active]:border-violet-500 data-[state=active]:text-violet-600 px-6 py-3 text-base">
                   The Story
                 </TabsTrigger>
-                <TabsTrigger value="updates" className="rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:text-green-600 px-6 py-3 text-base">
+                <TabsTrigger value="updates" className="rounded-none border-b-2 border-transparent data-[state=active]:border-violet-500 data-[state=active]:text-violet-600 px-6 py-3 text-base">
                   Updates
                 </TabsTrigger>
               </TabsList>
@@ -233,9 +233,9 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                   This is the full story of the campaign. In a real app, this would be rich text content loaded from the database.
                 </p>
                 
-                <div className="bg-green-50 p-6 rounded-2xl border border-green-100 my-8 not-prose">
-                  <h4 className="font-bold text-green-800 mb-2">Risks & Challenges</h4>
-                  <p className="text-green-700/80 text-sm">
+                <div className="bg-violet-50 p-6 rounded-2xl border border-violet-100 my-8 not-prose">
+                  <h4 className="font-bold text-violet-800 mb-2">Risks & Challenges</h4>
+                  <p className="text-violet-700/80 text-sm">
                     All projects involve risk. Please do your own research (DYOR) before contributing.
                   </p>
                 </div>
@@ -260,7 +260,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
                 <div className="flex justify-between text-sm font-bold pt-2">
                   <span className="text-slate-900">{Math.round(progress)}% funded</span>
-                  <span className="flex items-center gap-1 text-green-600"><Clock className="w-4 h-4"/> {campaign.daysLeft} days left</span>
+                  <span className="flex items-center gap-1 text-violet-600"><Clock className="w-4 h-4"/> {campaign.daysLeft} days left</span>
                 </div>
               </div>
 
@@ -274,7 +274,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                 
                 <div className={`transition-all duration-300 ${!showDonateButton ? "opacity-50 grayscale pointer-events-none" : "opacity-100"}`}>
                   <div className="relative">
-                    <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-lg ${campaign.currency === 'USDC' ? 'text-green-600' : 'text-blue-600'}`}>
+                    <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-lg ${campaign.currency === 'USDC' ? 'text-violet-600' : 'text-blue-600'}`}>
                       {campaign.currency || "USDC"}
                     </span>
                     <Input 
@@ -282,7 +282,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                       placeholder="100" 
                       value={donateAmount}
                       onChange={(e) => setDonateAmount(e.target.value)}
-                      className="pl-24 h-14 rounded-xl border-slate-200 bg-slate-50 text-xl font-bold focus-visible:ring-green-500"
+                      className="pl-24 h-14 rounded-xl border-slate-200 bg-slate-50 text-xl font-bold focus-visible:ring-violet-500"
                     />
                   </div>
                 </div>

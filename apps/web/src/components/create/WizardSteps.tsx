@@ -212,7 +212,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                   <SelectValue />
                </SelectTrigger>
                <SelectContent className="bg-white border-slate-200 shadow-xl rounded-xl z-50">
-                  <SelectItem value="USDC" className="text-sm font-bold text-green-600 py-3 cursor-pointer">USDC (Stellar Dollar)</SelectItem>
+                  <SelectItem value="USDC" className="text-sm font-bold text-violet-600 py-3 cursor-pointer">USDC (Stellar Dollar)</SelectItem>
                   <SelectItem value="USDC" className="text-sm font-bold text-blue-500 py-3 cursor-pointer">USDC (Circle USD)</SelectItem>
                </SelectContent>
             </Select>
@@ -223,7 +223,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                <Label>Target Amount</Label>
                <div className="relative">
      
-                  <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-sm ${formData.currency === 'USDC' ? 'text-green-600' : 'text-blue-500'}`}>
+                  <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-sm ${formData.currency === 'USDC' ? 'text-violet-600' : 'text-blue-500'}`}>
                      {formData.currency}
                   </span>
                   <Input type="number" className="pl-20 h-14 rounded-xl text-lg font-bold" value={formData.goal} onChange={(e) => setFormData({...formData, goal: e.target.value})} />
@@ -248,15 +248,15 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             </Select>
          </div>
 
-         <div className={`p-6 rounded-xl border flex gap-4 items-start mt-6 ${formData.currency === 'USDC' ? 'bg-green-50 border-green-100' : 'bg-blue-50 border-blue-100'}`}>
+         <div className={`p-6 rounded-xl border flex gap-4 items-start mt-6 ${formData.currency === 'USDC' ? 'bg-violet-50 border-violet-100' : 'bg-blue-50 border-blue-100'}`}>
             <div className="p-2 bg-white rounded-full shadow-sm shrink-0">
-               <Rocket className={`w-5 h-5 ${formData.currency === 'USDC' ? 'text-green-500' : 'text-blue-500'}`} />
+               <Rocket className={`w-5 h-5 ${formData.currency === 'USDC' ? 'text-violet-500' : 'text-blue-500'}`} />
             </div>
             <div>
-               <h4 className={`font-bold ${formData.currency === 'USDC' ? 'text-green-900' : 'text-blue-900'}`}>
+               <h4 className={`font-bold ${formData.currency === 'USDC' ? 'text-violet-900' : 'text-blue-900'}`}>
                   Raising in {formData.currency}
                </h4>
-               <p className={`text-sm mt-1 ${formData.currency === 'USDC' ? 'text-green-700/80' : 'text-blue-700/80'}`}>
+               <p className={`text-sm mt-1 ${formData.currency === 'USDC' ? 'text-violet-700/80' : 'text-blue-700/80'}`}>
                   {formData.currency === 'USDC' 
                      ? "USDC ensures your funding runway doesn't evaporate due to market volatility, natively on Stellar." 
                      : "USDC is the industry standard stablecoin, providing deep liquidity and trust."}

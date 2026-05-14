@@ -57,7 +57,7 @@ export function ConnectWallet() {
     return (
       <div className="relative inline-flex">
         {justConnected && (
-          <span className="absolute -inset-1 rounded-full bg-green-500 opacity-75 animate-ping duration-1000" />
+          <span className="absolute -inset-1 rounded-full bg-violet-500 opacity-75 animate-ping duration-1000" />
         )}
 
         <DropdownMenu>
@@ -72,7 +72,7 @@ export function ConnectWallet() {
               `}
             >
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-violet-300 animate-pulse" />
                 <span className="font-mono text-sm">
                   {address.slice(0, 6)}...{address.slice(-4)}
                 </span>
