@@ -1,8 +1,8 @@
-import type { Metadata } from_ "next";
-import { Plus_Jakarta_Sans } from_ "next/font/google";
+import type { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { Toaster } from_ "@/components/ui/sonner";
-import { Providers } from_ "@/components/fundx/Providers";
+import { Toaster } from "@/components/ui/sonner";
+import { Providers } from "@/components/fundx/Providers";
 
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 

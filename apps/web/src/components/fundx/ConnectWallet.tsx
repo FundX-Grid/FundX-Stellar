@@ -1,10 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { useAccount, useConnect } from "wagmi"
-import { injected } from "wagmi/connectors"
-import { isMiniPay } from "@/lib/wallet"
+import { useStellarWallet } from "./StellarProvider"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -18,18 +15,12 @@ import { ChevronDown, Copy, LogOut } from "lucide-react"
 import { toast } from "sonner"
 
 export function ConnectWallet() {
-  const { address, isConnected } = useAccount()
-  const { connect } = useConnect()
+  const { address, isConnected, connect, disconnect } = useStellarWallet()
   const [mounted, setMounted] = useState(false)
   const [justConnected, setJustConnected] = useState(false)
-  const [isMini, setIsMini] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    if (isMiniPay()) {
-      setIsMini(true)
-      connect({ connector: injected({ target: "metaMask" }) })
-    }
   }, [])
 
   useEffect(() => {
@@ -62,9 +53,6 @@ export function ConnectWallet() {
     )
   }
 
-  // Inside MiniPay: wallet connects silently — hide the button until resolved
-  if (isMini && !isConnected) return null
-
   if (isConnected && address) {
     return (
       <div className="relative inline-flex">
@@ -79,17 +67,12 @@ export function ConnectWallet() {
                 relative z-10 rounded-full px-6 font-bold tracking-tight transition-all duration-500
                 ${justConnected
                   ? "bg-[#fbe72b] border-[#fbe72b] text-slate-900 shadow-lg"
-                  : "bg-gradient-tush text-slate-900 shadow-glow hover:opacity-90 hover:scale-105"
+                  : "bg-gradient-to-r from-[#fbe72b] to-[#fbd32b] text-slate-900 shadow-glow hover:opacity-90 hover:scale-105"
                 }
               `}
             >
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
-                {isMini && (
-                  <span className="text-[10px] text-emerald-600 border border-emerald-300/50 bg-emerald-50 px-2 py-0.5 rounded-full font-bold tracking-wider uppercase">
-                    MiniPay
-                  </span>
-                )}
                 <span className="font-mono text-sm">
                   {address.slice(0, 6)}...{address.slice(-4)}
                 </span>
@@ -105,7 +88,7 @@ export function ConnectWallet() {
 
             <div className="mx-1 px-3 py-2 mb-2 bg-slate-50 rounded-lg border border-slate-100">
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold text-slate-700">Stellar Mainnet</span>
+                <span className="text-xs font-bold text-slate-700">Stellar Testnet</span>
               </div>
               <p className="text-[10px] text-slate-400 font-mono break-all leading-tight">
                 {address}
@@ -124,19 +107,13 @@ export function ConnectWallet() {
 
             <DropdownMenuSeparator />
 
-            {!isMini && (
-              <ConnectButton.Custom>
-                {({ openAccountModal }) => (
-                  <DropdownMenuItem
-                    onClick={openAccountModal}
-                    className="cursor-pointer focus:bg-red-50 focus:text-red-600 text-red-500 font-medium py-2.5"
-                  >
-                    <LogOut className="w-4 h-4 mr-2 opacity-70" />
-                    Disconnect
-                  </DropdownMenuItem>
-                )}
-              </ConnectButton.Custom>
-            )}
+            <DropdownMenuItem
+              onClick={disconnect}
+              className="cursor-pointer focus:bg-red-50 focus:text-red-600 text-red-500 font-medium py-2.5"
+            >
+              <LogOut className="w-4 h-4 mr-2 opacity-70" />
+              Disconnect
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -144,15 +121,11 @@ export function ConnectWallet() {
   }
 
   return (
-    <ConnectButton.Custom>
-      {({ openConnectModal }) => (
-        <Button
-          onClick={openConnectModal}
-          className="rounded-full bg-slate-900 text-white hover:bg-[#fbe72b] hover:text-slate-900 shadow-lg shadow-slate-900/20 px-6 transition-all hover:scale-105"
-        >
-          Connect Wallet
-        </Button>
-      )}
-    </ConnectButton.Custom>
+    <Button
+      onClick={connect}
+      className="rounded-full bg-slate-900 text-white hover:bg-[#fbe72b] hover:text-slate-900 shadow-lg shadow-slate-900/20 px-6 transition-all hover:scale-105"
+    >
+      Connect Wallet
+    </Button>
   )
 }

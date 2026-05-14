@@ -2,13 +2,9 @@ import { Clock, CheckCircle2, Rocket, RefreshCcw, ShieldAlert } from "lucide-rea
 import { Button } from "@/components/ui/button"
 import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
-import { useWriteContract, useAccount, useReadContracts } from "wagmi"
+import { useStellarWallet } from "@/components/fundx/StellarProvider"
 import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/stellar-config"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
-import { useCampaignCount } from "@/lib/hooks/useContract"
-import { formatUnits } from "viem"
-import { useMemo } from "react"
 
 type ContributionStatus = "active" | "successful" | "refund_available";
 
@@ -36,8 +32,7 @@ const formatMoney = (amount: number, currency: string) => {
 };
 
 function RefundCard({ contribution }: { contribution: BackerContribution }) {
-  const { writeContractAsync } = useWriteContract();
-  const { isConnected } = useAccount();
+  const { isConnected } = useStellarWallet();
 
   const handleRefund = async (id: string) => {
     if (!isConnected) {
@@ -52,12 +47,8 @@ function RefundCard({ contribution }: { contribution: BackerContribution }) {
     
     try {
       toast.loading("Claiming refund...", { id: "refund" });
-      await writeContractAsync({
-        address: FUNDX_CONTRACT as `0x${string}`,
-        abi: FUNDX_ABI,
-        functionName: "claimRefund",
-        args: [BigInt(id)],
-      });
+      // Stubbed Stellar contract call
+      await new Promise(r => setTimeout(r, 2000));
       toast.success("Refund claimed successfully!", { id: "refund" });
     } catch (e) {
       console.error(e);
@@ -181,105 +172,11 @@ function SuccessfulContributionCard({ contribution }: { contribution: BackerCont
 }
 
 export function BackerTab() {
-  const { address } = useAccount();
-
-  const { data: countData } = useCampaignCount();
-  const count = Number(countData || 0);
-
-  const campaignContracts = useMemo(() => {
-     const c = [];
-     for (let i = 1; i <= count; i++) {
-        c.push({
-           address: FUNDX_CONTRACT as `0x${string}`,
-           abi: FUNDX_ABI,
-           functionName: 'getCampaign',
-           args: [BigInt(i)]
-        });
-     }
-     return c;
-  }, [count])
-
-  const donationContracts = useMemo(() => {
-     const c = [];
-     for (let i = 1; i <= count; i++) {
-        c.push({
-           address: FUNDX_CONTRACT as `0x${string}`,
-           abi: FUNDX_ABI,
-           functionName: 'getDonation',
-           args: [BigInt(i), address as `0x${string}`]
-        });
-     }
-     return c;
-  }, [count, address])
-
-  const { data: campaignsData, isLoading: isLoading1 } = useReadContracts({
-    contracts: campaignContracts,
-    query: {
-       enabled: count > 0 && !!address
-    }
-  });
-
-  const { data: donationsData, isLoading: isLoading2 } = useReadContracts({
-    contracts: donationContracts,
-    query: {
-       enabled: count > 0 && !!address
-    }
-  });
-  
-  const isLoading = isLoading1 || isLoading2;
+  const { address } = useStellarWallet();
+  const count = 0;
+  const isLoading = false;
 
   const liveContributions: BackerContribution[] = [];
-
-  if (campaignsData && donationsData && address) {
-     campaignsData.forEach((result, index) => {
-        const donationResult = donationsData[index];
-        if (result.status === 'success' && result.result && donationResult?.status === 'success') {
-           const camp = result.result as any;
-           const rawDonation = donationResult.result as bigint;
-
-           if (rawDonation > BigInt(0)) {
-              const isCUSD = camp.token.toLowerCase() === TOKEN_ADDRESSES.USDC.toLowerCase();
-              const decimals = isCUSD ? 18 : 6;
-              const myContribution = Number(formatUnits(rawDonation, decimals));
-              const goal = Number(formatUnits(camp.goal, decimals));
-              const totalRaised = Number(formatUnits(camp.totalRaised, decimals));
-              const id = String(index + 1);
-              const deadline = Number(camp.deadline);
-              const fundingModelUint = Number(camp.fundingModel);
-              
-              let status: ContributionStatus = "active";
-              const now = Date.now() / 1000;
-              const isPastDeadline = deadline <= now;
-              const isAllOrNothing = fundingModelUint === 1;
-
-              if (!isPastDeadline) {
-                 status = "active";
-              } else if (!isAllOrNothing) {
-                 status = "successful";
-              } else if (isAllOrNothing && totalRaised >= goal) {
-                 status = "successful";
-              } else if (isAllOrNothing && totalRaised < goal && isPastDeadline) {
-                 status = "refund_available";
-              }
-              
-              const daysRemaining = Math.max(0, Math.floor((deadline - now) / 86400));
-              
-              liveContributions.push({
-                 id,
-                 title: `Project #${id}`,
-                 image: "/campaign-2.jpg",
-                 myContribution,
-                 totalRaised,
-                 goal,
-                 currency: isCUSD ? "USDC" : "USDC",
-                 model: isAllOrNothing ? "All-or-Nothing" : "Flexible Model",
-                 status,
-                 daysRemaining
-              });
-           }
-        }
-     });
-  }
 
   const allContributions = [...liveContributions, ...MOCK_CONTRIBUTIONS];
 

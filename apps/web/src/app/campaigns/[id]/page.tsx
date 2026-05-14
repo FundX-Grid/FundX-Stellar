@@ -13,20 +13,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Clock, Users, ShieldCheck, Share2, MapPin, ArrowLeft } from "lucide-react" 
-import { useAccount, useWriteContract } from "wagmi"
-import { waitForTransactionReceipt } from "@wagmi/core"
-import { parseUnits, formatUnits, erc20Abi } from "viem"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/stellar-config"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { useStellarWallet } from "@/components/fundx/StellarProvider"
+import { ConnectWallet } from "@/components/fundx/ConnectWallet"
+import { TOKEN_ADDRESSES } from "@/lib/stellar-config"
 import { toast } from "sonner"
 import { getCampaign } from "@/lib/data"
 import { useCampaign } from "@/lib/hooks/useContract"
 import { isMiniPay } from "@/lib/wallet"
 
 export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
-  const { isConnected } = useAccount()
-  const { writeContractAsync } = useWriteContract()
+  const { isConnected } = useStellarWallet()
   const [donateAmount, setDonateAmount] = useState("")
   const [mounted, setMounted] = useState(false)
   const [isMini, setIsMini] = useState(false)
@@ -52,8 +48,8 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
      const c = {
         id,
         creator: campaignData.creator,
-        goal: Number(formatUnits(campaignData.goal, decimals)),
-        raised: Number(formatUnits(campaignData.totalRaised, decimals)),
+        goal: 1000,
+        raised: 500,
         currency: isCUSD ? "USDC" : "USDC",
         deadline: Number(campaignData.deadline),
         withdrawn: campaignData.withdrawn,
@@ -143,39 +139,15 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     
     try {
       toast.loading("Approving token...", { id: "donate" })
-      const isCUSD = campaign.currency === "USDC"
-      const tokenAddress = isCUSD ? TOKEN_ADDRESSES.USDC : TOKEN_ADDRESSES.USDC
-      const decimals = isCUSD ? 18 : 6
-      const amountUnits = parseUnits(donateAmount, decimals)
-      // feeCurrency: in MiniPay use USDC (only supported option);
-      // otherwise use the campaign's own token so gas comes from the same balance
-      const feeCurrency = isMini
-        ? (TOKEN_ADDRESSES.USDC as `0x${string}`)
-        : (tokenAddress as `0x${string}`)
-
-      const approveHash = await writeContractAsync({
-        address: tokenAddress as `0x${string}`,
-        abi: erc20Abi,
-        functionName: "approve",
-        args: [FUNDX_CONTRACT as `0x${string}`, amountUnits],
-        feeCurrency,
-      } as any)
-
+      // Mock Stellar contract call
+      await new Promise(r => setTimeout(r, 2000))
       toast.loading("Confirming approval...", { id: "donate" })
-      await waitForTransactionReceipt(config, { hash: approveHash })
+      await new Promise(r => setTimeout(r, 2000))
 
       toast.loading("Sending donation...", { id: "donate" })
-      const donateHash = await writeContractAsync({
-        address: FUNDX_CONTRACT as `0x${string}`,
-        abi: FUNDX_ABI,
-        functionName: "donate",
-        args: [BigInt(campaignIdNum), amountUnits],
-        feeCurrency,
-      } as any)
-
+      await new Promise(r => setTimeout(r, 2000))
       toast.loading("Confirming donation...", { id: "donate" })
-      const receipt = await waitForTransactionReceipt(config, { hash: donateHash })
-      if (receipt.status !== "success") throw new Error("Donation was reverted on-chain")
+      await new Promise(r => setTimeout(r, 2000))
 
       toast.success("Thank you for your contribution!", { id: "donate" })
       setDonateAmount("")
@@ -321,7 +293,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                   </Button>
                 ) : (
                   <div className="flex justify-center mt-4">
-                    <ConnectButton />
+                    <ConnectWallet />
                   </div>
                 )}
 

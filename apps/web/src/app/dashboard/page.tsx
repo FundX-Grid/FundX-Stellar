@@ -2,8 +2,8 @@
 import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
-import { useAccount } from "wagmi"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { useStellarWallet } from "@/components/fundx/StellarProvider"
+import { ConnectWallet } from "@/components/fundx/ConnectWallet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { CreatorTab } from "@/components/dashboard/CreatorTab"
@@ -11,7 +11,7 @@ import { BackerTab } from "@/components/dashboard/BackerTab"
 
 
 export default function DashboardPage() {
-  const { isConnected } = useAccount()
+  const { isConnected } = useStellarWallet()
 
   if (!isConnected) {
     return (
@@ -22,7 +22,7 @@ export default function DashboardPage() {
            <h1 className="text-3xl font-bold text-slate-900 mb-4">Connect your wallet</h1>
            <p className="text-slate-500 mb-8">You need to connect your wallet to view your dashboard.</p>
            <div className="flex justify-center">
-             <ConnectButton />
+             <ConnectWallet />
            </div>
         </div>
         <Footer />

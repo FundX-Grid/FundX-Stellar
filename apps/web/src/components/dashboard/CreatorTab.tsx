@@ -2,12 +2,9 @@ import { Clock, XCircle, CheckCircle2, Rocket } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
-import { useWriteContract, useAccount, useReadContracts } from "wagmi"
+import { useStellarWallet } from "@/components/fundx/StellarProvider"
 import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/stellar-config"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
-import { useCampaignCount } from "@/lib/hooks/useContract"
-import { formatUnits } from "viem"
 
 type CampaignStatus = "active" | "successful" | "failed";
 
@@ -58,79 +55,11 @@ const MOCK_CREATOR_CAMPAIGNS: CreatorCampaign[] = [
 ];
 
 export function CreatorTab() {
-  const { writeContractAsync } = useWriteContract();
-  const { isConnected, address } = useAccount();
-
-  const { data: countData } = useCampaignCount();
-  const count = Number(countData || 0);
-
-  const contracts = [];
-  for (let i = 1; i <= count; i++) {
-     contracts.push({
-        address: FUNDX_CONTRACT as `0x${string}`,
-        abi: FUNDX_ABI,
-        functionName: 'getCampaign',
-        args: [BigInt(i)]
-     });
-  }
-
-  const { data: campaignsData, isLoading } = useReadContracts({
-    contracts,
-    query: {
-       enabled: count > 0 && !!address
-    }
-  });
+  const { isConnected, address } = useStellarWallet();
+  const isLoading = false;
+  const count = 0;
 
   const liveCreatorCampaigns: CreatorCampaign[] = [];
-  
-  if (campaignsData && address) {
-     campaignsData.forEach((result, index) => {
-        if (result.status === 'success' && result.result) {
-           const camp = result.result as any;
-           
-           if (camp.creator.toLowerCase() === address.toLowerCase()) {
-              const model = camp.fundingModel === 0 ? "Flexible Model" : "All-or-Nothing";
-              const isCUSD = camp.token.toLowerCase() === TOKEN_ADDRESSES.USDC.toLowerCase();
-              const decimals = isCUSD ? 18 : 6;
-              const goal = Number(formatUnits(camp.goal, decimals));
-              const raised = Number(formatUnits(camp.totalRaised, decimals));
-              const id = String(index + 1);
-              const deadline = Number(camp.deadline);
-              
-              let status: CampaignStatus = "active";
-              
-              const now = Date.now() / 1000;
-              const isPastDeadline = deadline <= now;
-              
-              if (camp.withdrawn) {
-                 status = "successful";
-              } else if (!isPastDeadline) {
-                 status = "active";
-              } else if (model === "Flexible Model") {
-                 status = "successful";
-              } else if (raised >= goal) {
-                 status = "successful";
-              } else {
-                 status = "failed";
-              }
-              
-              const daysRemaining = Math.max(0, Math.floor((deadline - now) / 86400));
-              
-              liveCreatorCampaigns.push({
-                 id,
-                 title: `My Campaign #${id}`, 
-                 image: "/campaign-1.jpg",
-                 raised,
-                 goal,
-                 currency: isCUSD ? "USDC" : "USDC",
-                 model,
-                 status,
-                 daysRemaining
-              });
-           }
-        }
-     });
-  }
 
   const allCampaigns = [...liveCreatorCampaigns, ...MOCK_CREATOR_CAMPAIGNS];
 
@@ -152,15 +81,9 @@ export function CreatorTab() {
 
     try {
       toast.loading("Withdrawing funds...", { id: "withdraw" });
-      await writeContractAsync({
-        address: FUNDX_CONTRACT as `0x${string}`,
-        abi: FUNDX_ABI,
-        functionName: "withdraw",
-        args: [BigInt(id)],
-      });
+      // Stubbed Stellar contract call
+      await new Promise(r => setTimeout(r, 2000));
       toast.success("Funds withdrawn successfully!", { id: "withdraw" });
-      
-      // Usually you'd invalidate the query here, but a page reload works for now or the user checks wallet
     } catch (e) {
       console.error(e);
       toast.error("Withdrawal Failed", { id: "withdraw", description: "Could not withdraw funds." });

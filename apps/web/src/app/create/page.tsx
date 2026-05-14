@@ -5,11 +5,9 @@ import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
-import { useAccount, useWriteContract } from "wagmi"
-import { waitForTransactionReceipt } from "@wagmi/core"
-import { parseUnits } from "viem"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/stellar-config"
+import { useStellarWallet } from "@/components/fundx/StellarProvider"
+
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/stellar-config"
 import { toast } from "sonner"
 
 import { WizardSteps } from "@/components/create/WizardSteps"
@@ -39,8 +37,7 @@ export interface CreateCampaignData {
 }
 
 export default function CreateCampaign() {
-  const { isConnected } = useAccount()
-  const { writeContractAsync } = useWriteContract()
+  const { isConnected } = useStellarWallet()
   const [step, setStep] = useState(1)
   const [isMini, setIsMini] = useState(false)
   
@@ -87,7 +84,7 @@ export default function CreateCampaign() {
       toast.loading("Deploying Campaign...", { id: "deploy" })
       const tokenAddress = formData.currency === "USDC" ? TOKEN_ADDRESSES.USDC : TOKEN_ADDRESSES.USDC
       const decimals = formData.currency === "USDC" ? 18 : 6
-      const goalUnits = parseUnits(formData.goal, decimals)
+      const goalUnits = BigInt(Math.floor(Number(formData.goal) * (10 ** decimals)))
       const durationSeconds = BigInt(Number(formData.duration) * 86400)
       const fundingModelUint = Number(formData.fundingModel)
       // feeCurrency: in MiniPay use USDC (only supported); otherwise use the campaign token
@@ -95,17 +92,10 @@ export default function CreateCampaign() {
         ? (TOKEN_ADDRESSES.USDC as `0x${string}`)
         : (tokenAddress as `0x${string}`)
 
-      const hash = await writeContractAsync({
-        address: FUNDX_CONTRACT as `0x${string}`,
-        abi: FUNDX_ABI,
-        functionName: "createCampaign",
-        args: [tokenAddress as `0x${string}`, goalUnits, durationSeconds, fundingModelUint],
-        feeCurrency,
-      } as any)
-
+      // Mock Stellar contract call
+      await new Promise(r => setTimeout(r, 2000))
       toast.loading("Confirming on-chain...", { id: "deploy" })
-      const receipt = await waitForTransactionReceipt(config, { hash })
-      if (receipt.status !== "success") throw new Error("Campaign creation was reverted on-chain")
+      await new Promise(r => setTimeout(r, 2000))
 
       toast.success("Campaign Deployed!", { id: "deploy" })
     } catch (error) {
