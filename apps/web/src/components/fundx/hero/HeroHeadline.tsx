@@ -11,7 +11,7 @@ export function HeroHeadline() {
         on the
         <span className="inline-flex items-center justify-center gap-3">
           <Image src="/stellar-stellar-logo.svg" alt="Stellar" width={48} height={48} className="w-12 h-12 md:w-14 md:h-14 object-contain drop-shadow-sm" />
-          <span className="bg-[#fbe72b] text-slate-900 px-5 py-2 md:py-3 rounded-[2rem] border border-black/5 shadow-lg shadow-[#fbe72b]/30 font_-extrabold pb-1">Stellar</span>
+          <span className="bg-[#7b3fe4] text-slate-900 px-5 py-2 md:py-3 rounded-[2rem] border border-black/5 shadow-lg shadow-[#7b3fe4]/30 font_-extrabold pb-1">Stellar</span>
         </span>
       </span>
       <br />

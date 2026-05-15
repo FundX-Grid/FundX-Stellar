@@ -48,7 +48,7 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
             <Progress value={percentage} className="h-3 rounded-full bg-slate-100" />
           </div>
 
-          <Button className="w-full rounded-xl bg-slate-900 text-white shadow-lg transition-all duration-500 hover:bg-[#fbe72b] hover:text-slate-900 hover:scale-[1.02] py-6 text-base font-bold">
+          <Button className="w-full rounded-xl bg-slate-900 text-white shadow-lg transition-all duration-500 hover:bg-[#7b3fe4] hover:text-slate-900 hover:scale-[1.02] py-6 text-base font-bold">
             Donate Now
           </Button>
         </div>

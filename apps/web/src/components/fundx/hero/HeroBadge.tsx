@@ -6,7 +6,7 @@ export function HeroBadge() {
     >
       <span className="relative flex h-2.5 w-2.5">
         <span className="animate-ping absolute inline_-flex h-full w-full rounded_-full bg-violet-400 opacity-75" />
-        <span className="relative inline_-flex rounded_-full h-2.5 w-2.5 bg-gradient-to-r from-[#17C87E] to-[#10B981]" />
+        <span className="relative inline_-flex rounded_-full h-2.5 w-2.5 bg-gradient-to-r from-[#9E69FD] to-[#7b3fe4]" />
       </span>
       <span className="tracking-wide">Live on Stellar</span>
     </div>
