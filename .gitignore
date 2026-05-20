@@ -33,3 +33,11 @@ Nikolaus.js
 TheWolf.js
 rescue.js
 scratch/
+
+# Rust / Soroban build artifacts
+**/target/
+*.wasm
+**/test_snapshots/
+
+# TS incremental build
+**/tsconfig.tsbuildinfo

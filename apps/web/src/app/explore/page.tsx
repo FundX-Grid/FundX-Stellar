@@ -6,71 +6,66 @@ import { Footer } from "@/components/fundx/Footer"
 import { CampaignCard } from "@/components/fundx/CampaignCard"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Search, ArrowUp, Sparkles, Filter } from "lucide-react" // 🚨 ADDED: Filter icon
+import { Search, ArrowUp, Sparkles, Filter, Loader2 } from "lucide-react"
 import { CAMPAIGNS } from "@/lib/data"
+import { useAllCampaigns } from "@/lib/hooks/useContract"
 
 const CATEGORIES = ["All", "DeFi", "Mining", "Gaming", "Social Impact", "Infrastructure"]
 const STATUSES = ["All", "active", "successful", "failed"] // 🚨 ADDED: Status options
 
 export default function ExplorePage() {
+  const { campaigns, isLoading, count, deployed } = useAllCampaigns()
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
-  const [statusFilter, setStatusFilter] = useState("All") // 🚨 ADDED: Status state
-  const [visibleCount, setVisibleCount] = useState(3) // Start low to show "Load More"
+  const [statusFilter, setStatusFilter] = useState("All")
+  const [visibleCount, setVisibleCount] = useState(3)
   const [showScrollTop, setShowScrollTop] = useState(false)
 
-  // 1. Scroll Detection for "Back to Top"
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400)
-    }
+    const handleScroll = () => setShowScrollTop(window.scrollY > 400)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" })
 
-// 2. Filter & Sort Logic (Bulletproofed)
+  // Merge live campaigns first, mock campaigns pad the rest
+  const liveIds = new Set(campaigns.map((c) => c.id))
+  const mockAsDisplay = CAMPAIGNS.filter((c) => !liveIds.has(c.id)).map((c) => ({
+    id: c.id,
+    title: c.title,
+    description: c.description,
+    image: c.image,
+    category: c.category,
+    raised: c.raised,
+    goal: c.goal,
+    currency: c.currency as "USDC",
+    status: c.status as "active" | "successful" | "failed",
+  }))
+  const allDisplayCampaigns = [...campaigns, ...mockAsDisplay]
+
   const filteredCampaigns = useMemo(() => {
-    // Step 1: Safely Filter
-    const filtered = CAMPAIGNS.filter((c) => {
-      const searchTarget = searchQuery.toLowerCase();
-      
-      // Fallbacks added: (c.title || "") prevents crashes if a field is accidentally left blank
-      const matchesSearch = 
-        (c.title || "").toLowerCase().includes(searchTarget) || 
-        (c.description || "").toLowerCase().includes(searchTarget);
-      
-      const matchesCategory = 
-        selectedCategory === "All" || 
-        c.category === selectedCategory || 
-        (selectedCategory === "DeFi" && (c.category || "").includes("DeFi"));
+    const filtered = allDisplayCampaigns.filter((c) => {
+      const searchTarget = searchQuery.toLowerCase()
+      const matchesSearch =
+        (c.title || "").toLowerCase().includes(searchTarget) ||
+        (c.description || "").toLowerCase().includes(searchTarget)
 
-      // Fallback: If a campaign is missing a status, treat it as "active"
-      const campaignStatus = c.status || "active";
-      const matchesStatus = statusFilter === "All" || campaignStatus === statusFilter;
+      const matchesCategory =
+        selectedCategory === "All" ||
+        c.category === selectedCategory ||
+        (selectedCategory === "DeFi" && (c.category || "").includes("DeFi"))
 
-      return matchesSearch && matchesCategory && matchesStatus;
-    });
+      const matchesStatus = statusFilter === "All" || c.status === statusFilter
 
-    // Step 2: Safely Sort (Active -> Successful -> Failed)
+      return matchesSearch && matchesCategory && matchesStatus
+    })
+
     return filtered.sort((a, b) => {
-      const statusWeight: Record<string, number> = {
-        active: 1,
-        successful: 2,
-        failed: 3
-      };
-      
-      // Assign weight, defaulting to 1 (active) if something is wrong
-      const weightA = statusWeight[a.status || "active"] || 1;
-      const weightB = statusWeight[b.status || "active"] || 1;
-      
-      return weightA - weightB;
-    });
-    
-  }, [searchQuery, selectedCategory, statusFilter]);
+      const w: Record<string, number> = { active: 1, successful: 2, failed: 3 }
+      return (w[a.status] || 1) - (w[b.status] || 1)
+    })
+  }, [allDisplayCampaigns, searchQuery, selectedCategory, statusFilter])
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 3)
@@ -91,8 +86,12 @@ export default function ExplorePage() {
         {/* ANIMATED HEADER */}
         <div className="mb-12 text-center max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-500 mb-6">
-             <Sparkles className="w-3 h-3 text-orange-500" />
-             <span>{CAMPAIGNS.length} Active Campaigns</span>
+             {isLoading ? (
+               <Loader2 className="w-3 h-3 text-violet-500 animate-spin" />
+             ) : (
+               <Sparkles className="w-3 h-3 text-violet-500" />
+             )}
+             <span>{isLoading ? "Loading campaigns..." : `${allDisplayCampaigns.length} Campaign${allDisplayCampaigns.length !== 1 ? "s" : ""}${count > 0 ? ` · ${count} on-chain` : !deployed ? " · contract pending" : ""}`}</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tight mb-6">
             Explore the <span className="bg-gradient-tush bg-clip-text text-transparent">Economy</span>
@@ -164,42 +163,64 @@ export default function ExplorePage() {
 
         </div>
 
-        {/* RESULTS GRID (Staggered Animation) */}
-        {filteredCampaigns.length > 0 ? (
+        {/* LOADING SKELETON */}
+        {isLoading && (
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="h-[480px] rounded-3xl bg-white shadow-soft-md animate-pulse">
+                <div className="h-48 m-6 rounded-2xl bg-slate-100" />
+                <div className="px-6 space-y-3">
+                  <div className="h-5 bg-slate-100 rounded-lg w-3/4" />
+                  <div className="h-4 bg-slate-100 rounded-lg w-full" />
+                  <div className="h-4 bg-slate-100 rounded-lg w-5/6" />
+                  <div className="h-3 bg-slate-100 rounded-full w-full mt-4" />
+                  <div className="h-12 bg-slate-100 rounded-xl w-full mt-4" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* RESULTS GRID */}
+        {!isLoading && filteredCampaigns.length > 0 ? (
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
             {filteredCampaigns.slice(0, visibleCount).map((campaign, index) => (
-              <div 
-                key={campaign.id} 
-                className={`h-[480px] animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-backwards ${campaign.status === 'failed' ? 'opacity-60 grayscale-[0.5] hover:grayscale-0 transition-all' : ''}`} // 🚨 ADDED: Grayscale effect for failed campaigns
-                style={{ animationDelay: `${index * 100}ms` }} // Stagger Effect
+              <div
+                key={campaign.id}
+                className={`h-[480px] animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-backwards ${campaign.status === "failed" ? "opacity-60 grayscale-[0.5] hover:grayscale-0 transition-all" : ""}`}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <CampaignCard 
+                <CampaignCard
                   id={campaign.id}
                   title={campaign.title}
                   description={campaign.description}
                   raised={campaign.raised}
                   goal={campaign.goal}
                   image={campaign.image}
-                  currency={campaign.currency} // 🚨 ADDED: Currency to support multi-asset mock data
+                  currency={campaign.currency}
                 />
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 animate-in fade-in zoom-in duration-500">
-             <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner">
+          !isLoading && (
+            <div className="text-center py-20 animate-in fade-in zoom-in duration-500">
+              <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner">
                 🛸
-             </div>
-             <h3 className="text-2xl font-bold text-slate-900 mb-2">No campaigns found</h3>
-             <p className="text-slate-500 mb-6">We couldn't find anything matching your filters.</p>
-             <Button 
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">No campaigns found</h3>
+              <p className="text-slate-500 mb-6">
+                {!deployed ? "The Soroban contract isn't deployed yet — only demo campaigns will show." : "Nothing matches your filters."}
+              </p>
+              <Button
                 variant="outline"
-                onClick={() => {setSearchQuery(""); setSelectedCategory("All"); setStatusFilter("All");}} // 🚨 ADDED: Reset status filter
+                onClick={() => { setSearchQuery(""); setSelectedCategory("All"); setStatusFilter("All") }}
                 className="rounded-full border-slate-300 hover:bg-slate-50"
-             >
+              >
                 Clear Filters
-             </Button>
-          </div>
+              </Button>
+            </div>
+          )
         )}
 
         {/* LOAD MORE BUTTON */}

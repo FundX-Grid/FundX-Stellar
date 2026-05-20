@@ -1,13 +1,15 @@
 "use client"
 
-import React, { createContext, useContext, useEffect, useState } from "react"
-import { StellarWalletsKit, WalletNetwork, allowAllModules } from "@creit.tech/stellar-wallets-kit"
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react"
+import { StellarWalletsKit } from "@creit.tech/stellar-wallets-kit"
+import { getKit, connectWallet, disconnectWallet, getConnectedAddress } from "@/lib/stellar-wallet"
 
 interface StellarContextType {
   address: string | null
   isConnected: boolean
   connect: () => Promise<void>
-  disconnect: () => void
+  disconnect: () => Promise<void>
+  isLoading: boolean
   kit: StellarWalletsKit | null
 }
 
@@ -15,39 +17,32 @@ const StellarContext = createContext<StellarContextType | undefined>(undefined)
 
 export function StellarProvider({ children }: { children: React.ReactNode }) {
   const [address, setAddress] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
   const [kit, setKit] = useState<StellarWalletsKit | null>(null)
 
   useEffect(() => {
-    // Initialize the Stellar Wallets Kit
-    const kitInstance = new StellarWalletsKit({
-      network: WalletNetwork.TESTNET,
-      selectedWalletId: "freighter",
-      modules: allowAllModules(),
-    })
-    setKit(kitInstance)
+    setKit(getKit())
+    getConnectedAddress()
+      .then((a) => setAddress(a))
+      .finally(() => setIsLoading(false))
   }, [])
 
-  const connect = async () => {
-    if (!kit) return
+  const connect = useCallback(async () => {
     try {
-      await kit.openModal({
-        onWalletSelected: async (option) => {
-          kit.setWallet(option.id)
-          const { address } = await kit.getAddress()
-          setAddress(address)
-        },
-      })
-    } catch (error) {
-      console.error("Failed to connect wallet:", error)
+      const addr = await connectWallet()
+      setAddress(addr)
+    } catch (err) {
+      console.error("Failed to connect wallet:", err)
     }
-  }
+  }, [])
 
-  const disconnect = () => {
+  const disconnect = useCallback(async () => {
+    await disconnectWallet()
     setAddress(null)
-  }
+  }, [])
 
   return (
-    <StellarContext.Provider value={{ address, isConnected: !!address, connect, disconnect, kit }}>
+    <StellarContext.Provider value={{ address, isConnected: !!address, connect, disconnect, isLoading, kit }}>
       {children}
     </StellarContext.Provider>
   )
