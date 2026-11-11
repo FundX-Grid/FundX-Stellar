@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
 import { useStellarWallet } from "@/components/fundx/StellarProvider"
 
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/stellar-config"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES, TOKEN_DECIMALS } from "@/lib/stellar-config"
+import { createCampaignOnchain, waitForTx } from "@/lib/stellar-tx"
 import { toast } from "sonner"
 
 import { WizardSteps } from "@/components/create/WizardSteps"
@@ -37,7 +38,7 @@ export interface CreateCampaignData {
 }
 
 export default function CreateCampaign() {
-  const { isConnected } = useStellarWallet()
+  const { isConnected, address } = useStellarWallet()
   const [step, setStep] = useState(1)
   const [isMini, setIsMini] = useState(false)
   
@@ -74,28 +75,37 @@ export default function CreateCampaign() {
   }, [])
 
   const handleSubmit = async () => {
-    if (!isConnected && !isMini) {
+    if ((!isConnected || !address) && !isMini) {
       toast.error("Connect Wallet", {
         description: "You need to connect your wallet to deploy.",
       });
       return;
     }
+    const deployerAddress = address || ""
+    if (!deployerAddress) {
+      toast.error("Connect Wallet", {
+        description: "Valid connected wallet address required.",
+      });
+      return;
+    }
     try {
-      toast.loading("Deploying Campaign...", { id: "deploy" })
-      const tokenAddress = formData.currency === "USDC" ? TOKEN_ADDRESSES.USDC : TOKEN_ADDRESSES.USDC
-      const decimals = formData.currency === "USDC" ? 18 : 6
+      toast.loading("Awaiting wallet signature...", { id: "deploy" })
+      const tokenAddress = TOKEN_ADDRESSES.USDC
+      const decimals = TOKEN_DECIMALS.USDC
       const goalUnits = BigInt(Math.floor(Number(formData.goal) * (10 ** decimals)))
       const durationSeconds = BigInt(Number(formData.duration) * 86400)
       const fundingModelUint = Number(formData.fundingModel)
-      // feeCurrency: in MiniPay use USDC (only supported); otherwise use the campaign token
-      const feeCurrency = isMini
-        ? (TOKEN_ADDRESSES.USDC as `0x${string}`)
-        : (tokenAddress as `0x${string}`)
 
-      // Mock Stellar contract call
-      await new Promise(r => setTimeout(r, 2000))
+      const hash = await createCampaignOnchain(
+        deployerAddress,
+        tokenAddress,
+        goalUnits,
+        durationSeconds,
+        fundingModelUint
+      )
       toast.loading("Confirming on-chain...", { id: "deploy" })
-      await new Promise(r => setTimeout(r, 2000))
+      const ok = await waitForTx(hash)
+      if (!ok) throw new Error("Transaction could not be confirmed on-chain")
 
       toast.success("Campaign Deployed!", { id: "deploy" })
     } catch (error) {
