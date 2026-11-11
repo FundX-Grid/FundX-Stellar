@@ -108,3 +108,37 @@ export async function waitForTx(hash: string, maxAttempts = 30): Promise<boolean
   }
   return false
 }
+
+export async function createCampaignOnchain(
+  source: string,
+  tokenAddress: string,
+  goalUnits: bigint,
+  durationSeconds: bigint,
+  fundingModel: number
+): Promise<string> {
+  return buildAndSubmit(source, "create_campaign", [
+    new Address(source).toScVal(),
+    new Address(tokenAddress).toScVal(),
+    nativeToScVal(goalUnits, { type: "i128" }),
+    nativeToScVal(durationSeconds, { type: "u64" }),
+    nativeToScVal(fundingModel, { type: "u32" }),
+  ])
+}
+
+export async function checkTrustline(
+  source: string,
+  assetCode = "USDC"
+): Promise<boolean> {
+  try {
+    const acc = (await server().getAccount(source)) as unknown as {
+      balances?: Array<{ asset_type?: string; asset_code?: string }>
+    }
+    if (!acc || !acc.balances || !Array.isArray(acc.balances)) return true
+    return acc.balances.some(
+      (b) => b.asset_type === "native" || b.asset_code === assetCode
+    )
+  } catch {
+    return true
+  }
+}
+

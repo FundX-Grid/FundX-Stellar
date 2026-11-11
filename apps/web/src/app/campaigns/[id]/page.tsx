@@ -19,7 +19,7 @@ import { toast } from "sonner"
 import { getCampaign } from "@/lib/data"
 import { useCampaign, useDonation } from "@/lib/hooks/useContract"
 import { FUNDX_CONTRACT, isContractDeployed } from "@/lib/stellar-config"
-import { donateOnchain, withdrawOnchain, claimRefundOnchain, toUSDCUnits, waitForTx } from "@/lib/stellar-tx"
+import { donateOnchain, withdrawOnchain, claimRefundOnchain, toUSDCUnits, waitForTx, checkTrustline } from "@/lib/stellar-tx"
 
 const PLACEHOLDER_IMAGES = ["/campaign-1.jpg", "/campaign-2.jpg", "/campaign-3.jpg"]
 
@@ -161,6 +161,15 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     }
     try {
       setTxPending(true)
+      toast.loading("Verifying wallet trustline...", { id: "donate" })
+      const hasTrustline = await checkTrustline(address, "USDC")
+      if (!hasTrustline) {
+        toast.error("Missing Trustline", {
+          id: "donate",
+          description: "Your Stellar account must establish a trustline for USDC before contributing.",
+        })
+        return
+      }
       toast.loading("Awaiting wallet signature...", { id: "donate" })
       const hash = await donateOnchain(address, campaignIndex, toUSDCUnits(donateAmount))
       toast.loading("Confirming on-chain...", { id: "donate" })
